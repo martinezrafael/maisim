@@ -20,44 +20,52 @@ const Top = ({ userCep }) => {
   const totalQuantity = data.reduce((total, item) => total + item.UNIDADES, 0);
 
   const groupedData = data.reduce((acc, item) => {
-    const { SETOR_NEC_ABERTO } = item;
+    const { SETOR_NEC_ABERTO, UNIDADES } = item;
     if (!acc[SETOR_NEC_ABERTO]) {
-      acc[SETOR_NEC_ABERTO] = [];
+      acc[SETOR_NEC_ABERTO] = {
+        totalQuantity: UNIDADES,
+        items: [item],
+      };
+    } else {
+      acc[SETOR_NEC_ABERTO].totalQuantity += UNIDADES;
+      acc[SETOR_NEC_ABERTO].items.push(item);
     }
-    acc[SETOR_NEC_ABERTO].push({
-      ...item,
-      percentage: (item.UNIDADES / totalQuantity) * 100,
-    });
     return acc;
   }, {});
 
   return (
     <div>
-      <p>Total de unidades: {totalQuantity}</p>
-      {Object.keys(groupedData).map((setor) => (
-        <div key={setor}>
-          <h2>{setor}</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Laboratório</th>
-                <th>Share</th>
-              </tr>
-            </thead>
-            <tbody>
-              {groupedData[setor].map((item, index) => (
-                <tr key={index} className={`item-${(index += 1)}`}>
-                  <td>{item.PRODUTO}</td>
-                  <td>{item.LABORATORIO}</td>
-                  <td>{item.UNIDADES}</td>
-                  <td>{item.percentage.toFixed(2)}%</td>
+      {Object.keys(groupedData).map((setor) => {
+        const { totalQuantity, items } = groupedData[setor];
+        return (
+          <div key={setor}>
+            <h2>{setor}</h2>
+            <p>Total de unidades do setor: {totalQuantity}</p>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Laboratório</th>
+                  <th>Quantidade</th>
+                  <th>Share</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ))}
+              </thead>
+              <tbody>
+                {items.map((item, index) => (
+                  <tr key={index} className={`item-${(index += 1)}`}>
+                    <td>{item.PRODUTO}</td>
+                    <td>{item.LABORATORIO}</td>
+                    <td>{item.UNIDADES}</td>
+                    <td>
+                      {((item.UNIDADES / totalQuantity) * 100).toFixed(2)}%
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
     </div>
   );
 };
