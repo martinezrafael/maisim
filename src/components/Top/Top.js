@@ -17,6 +17,8 @@ const Top = ({ userCep }) => {
     fetchData();
   }, [userCep]);
 
+  const totalQuantity = data.reduce((total, item) => total + item.UNIDADES, 0);
+
   const groupedData = data.reduce((acc, item) => {
     const { SETOR_NEC_ABERTO } = item;
     if (!acc[SETOR_NEC_ABERTO]) {
@@ -28,6 +30,7 @@ const Top = ({ userCep }) => {
 
   return (
     <div>
+      <p>Total de unidades: {totalQuantity}</p>
       {Object.keys(groupedData).map((setor) => (
         <div key={setor}>
           <h2>{setor}</h2>
