@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export const getAccessToken = async () => {
-  const clientUrl = process.env.API_URL;
-  const clientId = process.env.CLIENT_ID;
-  const clientSecret = process.env.CLIENT_SECRET;
+  const clientUrl = process.env.REACT_APP_API_URL;
+  const clientId = process.env.REACT_APP_CLIENT_ID;
+  const clientSecret = process.env.REACT_APP_CLIENT_SECRET;
 
   const endpoint = `${clientUrl}/admin/api/oauth2/access_token`;
 
