@@ -64,13 +64,9 @@ const Top = ({ userCep }) => {
               <thead>
                 <tr>
                   <th>Nome</th>
-                  {selectedItems.length > 0 && (
-                    <>
-                      <th>Laboratório</th>
-                      <th>Quantidade</th>
-                      <th>Share</th>
-                    </>
-                  )}
+                  <th>Laboratório</th>
+                  <th>Quantidade</th>
+                  <th>Share</th>
                 </tr>
               </thead>
               <tbody>
