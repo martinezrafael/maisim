@@ -24,7 +24,10 @@ const Top = ({ userCep }) => {
     if (!acc[SETOR_NEC_ABERTO]) {
       acc[SETOR_NEC_ABERTO] = [];
     }
-    acc[SETOR_NEC_ABERTO].push(item);
+    acc[SETOR_NEC_ABERTO].push({
+      ...item,
+      percentage: (item.UNIDADES / totalQuantity) * 100,
+    });
     return acc;
   }, {});
 
@@ -48,6 +51,7 @@ const Top = ({ userCep }) => {
                   <td>{item.PRODUTO}</td>
                   <td>{item.LABORATORIO}</td>
                   <td>{item.UNIDADES}</td>
+                  <td>{item.percentage.toFixed(2)}%</td>
                 </tr>
               ))}
             </tbody>
