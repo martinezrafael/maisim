@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { dataIqvia } from "../../api/iqvia.api";
 
-const Top = () => {
+const Top = ({ userCep }) => {
   const [data, setData] = useState([]);
-  const userCep = "01221010";
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,11 +18,24 @@ const Top = () => {
   }, [userCep]);
 
   return (
-    <div>
-      {data.map((item, index) => (
-        <p key={index}>{item.SETOR_NEC_ABERTO}</p>
-      ))}
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Laboratório</th>
+          <th>Share</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, index) => (
+          <tr key={index} className={`item-${(index += 1)}`}>
+            <td>{item.PRODUTO}</td>
+            <td>{item.LABORATORIO}</td>
+            <td>{item.UNIDADES}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { getAccessToken } from "../../api/learnwords.api";
+import Top from "../Top/Top";
 
 const User = () => {
   const [userData, setUserData] = useState(null);
@@ -18,7 +19,6 @@ const User = () => {
             "Lw-Client": clientId,
           },
         });
-        console.log(response.data);
         setUserData(response.data);
       } catch (error) {
         console.error("Erro ao obter dados do usuário:", error);
@@ -33,6 +33,7 @@ const User = () => {
         <div>
           <p>{userData.username}</p>
           <span>{userData.billing_info.bf_postalcode}</span>
+          <Top userCep={userData.billing_info.bf_postalcode.replace("-", "")} />
         </div>
       ) : (
         <p>Usuário não Encontrado</p>
