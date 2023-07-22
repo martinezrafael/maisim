@@ -18,11 +18,51 @@ const FileUpload = ({ userCep }) => {
       const sheet = workbook.Sheets[sheetName];
       const json = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
-      setJsonData(json);
+      // Chamar a API para obter o valor correto do campo "SETOR_NEC_ABERTO"
+      const dataFromApi = await dataIqvia(userCep);
+
+      const jsonDataWithSetor = json.map((item) => {
+        const encontrado = dataFromApi.find(
+          (apiData) =>
+            apiData.PRODUTO === item.PRODUTO &&
+            apiData.LABORATORIO === item.LABORATORIO
+        );
+
+        const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
+
+        return {
+          ...item,
+          SETOR_NEC_ABERTO: setor,
+        };
+      });
+
+      console.log(jsonDataWithSetor);
+
+      setJsonData(jsonDataWithSetor);
     };
 
     reader.readAsArrayBuffer(file);
   };
+
+  // Função para separar os dados pelo campo "SETOR_NEC_ABERTO"
+  const separateDataBySetor = () => {
+    if (!jsonData) return {};
+
+    const separatedData = {};
+
+    jsonData.forEach((item) => {
+      const setor = item.SETOR_NEC_ABERTO;
+      if (!separatedData[setor]) {
+        separatedData[setor] = [item];
+      } else {
+        separatedData[setor].push(item);
+      }
+    });
+
+    return separatedData;
+  };
+
+  const separatedData = separateDataBySetor();
 
   const handleUpload = async () => {
     try {
@@ -73,7 +113,11 @@ const FileUpload = ({ userCep }) => {
     <div>
       <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
       <button onClick={handleUpload}>Enviar</button>
-      {jsonData && <Estoque jsonData={jsonData} />}
+      {jsonData && (
+        <Estoque
+          jsonData={jsonData.map(({ SETOR_NEC_ABERTO, ...rest }) => rest)}
+        />
+      )}
     </div>
   );
 };
