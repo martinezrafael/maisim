@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import * as XLSX from "xlsx";
+import Estoque from "./Estoque";
+import { dataIqvia } from "../../api/iqvia.api";
 
-const FileUpload = () => {
+const FileUpload = ({ userCep }) => {
   const [jsonData, setJsonData] = useState(null);
 
   const handleFileChange = async (e) => {
@@ -22,12 +24,46 @@ const FileUpload = () => {
     reader.readAsArrayBuffer(file);
   };
 
-  const handleFetchData = async (cep) => {
+  const handleUpload = async () => {
     try {
-      const data = await axios.get(
-        `${process.env.REACT_APP_API_URL_IQVIA}/cep/${cep}`
-      );
-      setJsonData(data);
+      const dataFromApi = await dataIqvia(userCep);
+      console.log(dataFromApi);
+
+      // Converter os nomes e laboratórios da planilha para letras maiúsculas e sem espaços em branco extras
+      const jsonDataUpperCase = jsonData.map((item) => ({
+        ...item,
+        PRODUTO: item.PRODUTO ? item.PRODUTO.toUpperCase().trim() : "",
+        LABORATORIO: item.LABORATORIO
+          ? item.LABORATORIO.toUpperCase().trim()
+          : "",
+      }));
+
+      // Converter os nomes e laboratórios da API para letras maiúsculas e sem espaços em branco extras
+      const dataFromApiUpperCase = dataFromApi.map((apiData) => ({
+        ...apiData,
+        PRODUTO: apiData.PRODUTO.toUpperCase().trim(),
+        LABORATORIO: apiData.LABORATORIO.toUpperCase().trim(),
+      }));
+
+      // Compara os dados da planilha com os dados da API (case-insensitive e em letras maiúsculas)
+      const updatedJsonData = jsonDataUpperCase.map((item) => {
+        const encontrado = dataFromApiUpperCase.find(
+          (apiData) =>
+            apiData.PRODUTO === item.PRODUTO &&
+            apiData.LABORATORIO === item.LABORATORIO
+        );
+
+        console.log(encontrado);
+
+        const parteDoMix = encontrado ? "Sim" : "Não";
+
+        return {
+          ...item,
+          "Parte do Mix": parteDoMix,
+        };
+      });
+
+      setJsonData(updatedJsonData);
     } catch (error) {
       console.error("Erro ao obter dados de brick:", error);
     }
@@ -36,27 +72,8 @@ const FileUpload = () => {
   return (
     <div>
       <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
-      <button onClick={() => handleFetchData("your_cep_here")}>Comparar</button>
-      {jsonData && (
-        <table>
-          <thead>
-            <tr>
-              {Object.keys(jsonData[0]).map((key) => (
-                <th key={key}>{key}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {jsonData.map((row, index) => (
-              <tr key={index}>
-                {Object.values(row).map((value, index) => (
-                  <td key={index}>{value}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+      <button onClick={handleUpload}>Enviar</button>
+      {jsonData && <Estoque jsonData={jsonData} />}
     </div>
   );
 };

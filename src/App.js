@@ -10,11 +10,6 @@ function App() {
   return (
     <div className="App">
       <User />
-      <div>
-        <h1>Excel to JSON Converter and Estoque Table</h1>
-        <FileUpload setJsonData={setJsonData} />
-        <Estoque jsonData={jsonData} />
-      </div>
     </div>
   );
 }
