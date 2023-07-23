@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import axios from "axios";
 import * as XLSX from "xlsx";
 import Estoque from "./Estoque";
 import { dataIqvia } from "../../api/iqvia.api";
+import FileDownload from "./FileDownload";
 
 const FileUpload = ({ userCep }) => {
   const [jsonData, setJsonData] = useState(null);
@@ -95,7 +95,7 @@ const FileUpload = ({ userCep }) => {
         const parteDoMix = encontrado ? "Sim" : "Não";
         const setor = encontrado
           ? encontrado.SETOR_NEC_ABERTO
-          : "NÃO LOCALIZADO";
+          : "NÃO FAZEM PARTE DO MIX";
 
         return {
           ...item,
@@ -114,6 +114,7 @@ const FileUpload = ({ userCep }) => {
 
   return (
     <div>
+      <FileDownload />
       <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
       <button onClick={handleUpload}>Comparar</button>
       {jsonData && <Estoque jsonData={jsonData} />}
