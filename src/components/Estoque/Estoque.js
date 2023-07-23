@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Estoque = ({ jsonData }) => {
-  if (!jsonData) return null;
+  const [unlockedItems, setUnlockedItems] = useState([]);
+  const [planilhaCarregada, setPlanilhaCarregada] = useState(false);
+
+  const handleFileChange = (e) => {
+    setPlanilhaCarregada(true);
+  };
+
+  if (!jsonData && !planilhaCarregada) {
+    return (
+      <div>
+        <p>Faça o upload da planilha para exibir os dados</p>
+        <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
+      </div>
+    );
+  }
+
+  if (!jsonData) {
+    return <p>Carregando...</p>;
+  }
 
   // Função para separar os dados pelo campo "SETOR_NEC_ABERTO"
   const separateDataBySetor = () => {
@@ -28,17 +46,41 @@ const Estoque = ({ jsonData }) => {
           <table>
             <thead>
               <tr>
-                <th>PRODUTO</th>
-                <th>LABORATORIO</th>
-                <th>PART DO MIX</th>
+                <th>Produto</th>
+                <th>Laboratório</th>
+                <th>Parte do Mix</th>
               </tr>
             </thead>
             <tbody>
               {data.map((item, index) => (
                 <tr key={index}>
                   <td>{item.PRODUTO}</td>
-                  <td>{item.LABORATORIO}</td>
-                  <td>{item["PARTE DO MIX"]}</td>
+                  <td>
+                    {index < 3 && !unlockedItems.includes(item) ? (
+                      <button
+                        onClick={() =>
+                          setUnlockedItems([...unlockedItems, item])
+                        }
+                      >
+                        Desbloquear
+                      </button>
+                    ) : (
+                      item.LABORATORIO
+                    )}
+                  </td>
+                  <td>
+                    {index < 3 && !unlockedItems.includes(item) ? (
+                      <button
+                        onClick={() =>
+                          setUnlockedItems([...unlockedItems, item])
+                        }
+                      >
+                        Desbloquear
+                      </button>
+                    ) : (
+                      item["PARTE DO MIX"]
+                    )}
+                  </td>
                 </tr>
               ))}
             </tbody>

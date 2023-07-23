@@ -3,6 +3,7 @@ import axios from "axios";
 import { getAccessToken } from "../../api/learnwords.api";
 import Top from "../Top/Top";
 import FileUpload from "../Estoque/FileUpload";
+import CalcMetragem from "../Calculadora/CalcMetragem";
 
 const User = () => {
   const [userData, setUserData] = useState(null);
@@ -34,6 +35,7 @@ const User = () => {
         <div>
           <p>{userData.username}</p>
           <span>{userData.billing_info.bf_postalcode}</span>
+          <CalcMetragem />
           <Top userCep={userData.billing_info.bf_postalcode.replace("-", "")} />
           <FileUpload
             userCep={userData.billing_info.bf_postalcode.replace("-", "")}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { dataIqvia } from "../../api/iqvia.api";
+import Cadeado from "../../images/icons/cadeado.svg";
 
 const Top = ({ userCep }) => {
   const [data, setData] = useState([]);
@@ -59,13 +60,13 @@ const Top = ({ userCep }) => {
         return (
           <div key={setor}>
             <h2>{setor}</h2>
-            <p>Total de unidades do setor: {totalQuantity}</p>
+            {/* <p>Total de unidades do setor: {totalQuantity}</p> */}
             <table>
               <thead>
                 <tr>
                   <th>Nome</th>
                   <th>Laboratório</th>
-                  <th>Quantidade</th>
+                  {/* <th>Quantidade</th> */}
                   <th>Share</th>
                 </tr>
               </thead>
@@ -84,11 +85,12 @@ const Top = ({ userCep }) => {
                                 <>{item.LABORATORIO}</>
                               ) : (
                                 <button onClick={() => handlePurchase(item)}>
-                                  Desbloquear
+                                  <img src={Cadeado} />
+                                  Desbloquear comparação
                                 </button>
                               )}
                             </td>
-                            <td>
+                            {/* <td>
                               {isItemSelected ? (
                                 <>{item.UNIDADES}</>
                               ) : (
@@ -96,7 +98,7 @@ const Top = ({ userCep }) => {
                                   Desbloquear
                                 </button>
                               )}
-                            </td>
+                            </td> */}
                             <td>
                               {isItemSelected ? (
                                 <>
@@ -108,7 +110,8 @@ const Top = ({ userCep }) => {
                                 </>
                               ) : (
                                 <button onClick={() => handlePurchase(item)}>
-                                  Desbloquear
+                                  <img src={Cadeado} />
+                                  Desbloquear comparação
                                 </button>
                               )}
                             </td>
@@ -117,7 +120,7 @@ const Top = ({ userCep }) => {
                         {!isShowButton && (
                           <>
                             <td>{item.LABORATORIO}</td>
-                            <td>{item.UNIDADES}</td>
+                            {/* <td>{item.UNIDADES}</td> */}
                             <td>
                               {((item.UNIDADES / totalQuantity) * 100).toFixed(
                                 2

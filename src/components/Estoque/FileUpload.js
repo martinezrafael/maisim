@@ -93,7 +93,9 @@ const FileUpload = ({ userCep }) => {
         console.log(encontrado);
 
         const parteDoMix = encontrado ? "Sim" : "Não";
-        const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
+        const setor = encontrado
+          ? encontrado.SETOR_NEC_ABERTO
+          : "NÃO LOCALIZADO";
 
         return {
           ...item,
