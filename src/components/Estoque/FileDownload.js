@@ -34,7 +34,7 @@ const FileDownload = () => {
 
   return (
     <div>
-      <button onClick={generateExcel}>Download Planilha Excel</button>
+      <button onClick={generateExcel}>Baixe o Modelo da Planilha</button>
     </div>
   );
 };

@@ -11,6 +11,11 @@ const Top = ({ userCep }) => {
     const fetchData = async () => {
       try {
         const data = await dataIqvia(userCep);
+        console.log("Data from API:", data);
+        console.log(
+          "Total Quantity:",
+          data.reduce((total, item) => total + item.UNIDADES, 0)
+        );
         setData(data);
       } catch (error) {
         console.error("Erro ao obter dados:", error);
@@ -43,30 +48,34 @@ const Top = ({ userCep }) => {
     const { SETOR_NEC_ABERTO, UNIDADES } = item;
     if (!acc[SETOR_NEC_ABERTO]) {
       acc[SETOR_NEC_ABERTO] = {
-        totalQuantity: UNIDADES,
+        setorTotalQuantity: UNIDADES, // Modificação feita aqui
         items: [item],
       };
     } else {
-      acc[SETOR_NEC_ABERTO].totalQuantity += UNIDADES;
+      acc[SETOR_NEC_ABERTO].setorTotalQuantity += UNIDADES; // Modificação feita aqui
       acc[SETOR_NEC_ABERTO].items.push(item);
     }
     return acc;
   }, {});
 
+  // Verificação dos valores de Share para cada item
+  data.forEach((item) => {
+    const share = (item.UNIDADES / totalQuantity) * 100;
+    console.log("Share:", share.toFixed(2));
+  });
+
   return (
     <div>
       {Object.keys(groupedData).map((setor) => {
-        const { totalQuantity, items } = groupedData[setor];
+        const { setorTotalQuantity, items } = groupedData[setor]; // Correção feita aqui
         return (
           <div key={setor}>
             <h2>{setor}</h2>
-            {/* <p>Total de unidades do setor: {totalQuantity}</p> */}
             <table>
               <thead>
                 <tr>
                   <th>Nome</th>
                   <th>Laboratório</th>
-                  {/* <th>Quantidade</th> */}
                   <th>Share</th>
                 </tr>
               </thead>
@@ -78,57 +87,32 @@ const Top = ({ userCep }) => {
                     <React.Fragment key={index}>
                       <tr className={`item-${(index += 1)}`}>
                         <td>{item.PRODUTO}</td>
-                        {isShowButton && (
-                          <>
-                            <td>
-                              {isItemSelected ? (
-                                <>{item.LABORATORIO}</>
-                              ) : (
-                                <button onClick={() => handlePurchase(item)}>
-                                  <img src={Cadeado} />
-                                  Desbloquear comparação
-                                </button>
-                              )}
-                            </td>
-                            {/* <td>
-                              {isItemSelected ? (
-                                <>{item.UNIDADES}</>
-                              ) : (
-                                <button onClick={() => handlePurchase(item)}>
-                                  Desbloquear
-                                </button>
-                              )}
-                            </td> */}
-                            <td>
-                              {isItemSelected ? (
-                                <>
-                                  {(
-                                    (item.UNIDADES / totalQuantity) *
-                                    100
-                                  ).toFixed(2)}
-                                  %
-                                </>
-                              ) : (
-                                <button onClick={() => handlePurchase(item)}>
-                                  <img src={Cadeado} />
-                                  Desbloquear comparação
-                                </button>
-                              )}
-                            </td>
-                          </>
-                        )}
-                        {!isShowButton && (
-                          <>
-                            <td>{item.LABORATORIO}</td>
-                            {/* <td>{item.UNIDADES}</td> */}
-                            <td>
-                              {((item.UNIDADES / totalQuantity) * 100).toFixed(
-                                2
-                              )}
+                        <td>
+                          {isShowButton && !isItemSelected ? (
+                            <button onClick={() => handlePurchase(item)}>
+                              <img src={Cadeado} alt="Desbloquear comparação" />
+                              Desbloquear comparação
+                            </button>
+                          ) : (
+                            item.LABORATORIO
+                          )}
+                        </td>
+                        <td>
+                          {isShowButton && !isItemSelected ? (
+                            <button onClick={() => handlePurchase(item)}>
+                              <img src={Cadeado} alt="Desbloquear comparação" />
+                              Desbloquear comparação
+                            </button>
+                          ) : (
+                            <>
+                              {(
+                                (item.UNIDADES / setorTotalQuantity) *
+                                100
+                              ).toFixed(2)}
                               %
-                            </td>
-                          </>
-                        )}
+                            </>
+                          )}
+                        </td>
                       </tr>
                     </React.Fragment>
                   );

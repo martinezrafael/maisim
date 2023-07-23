@@ -59,8 +59,6 @@ const FileUpload = ({ userCep }) => {
     return separatedData;
   };
 
-  const separatedData = separateDataBySetor();
-
   const handleUpload = async () => {
     try {
       const dataFromApi = await dataIqvia(userCep);
