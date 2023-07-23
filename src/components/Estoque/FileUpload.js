@@ -24,8 +24,8 @@ const FileUpload = ({ userCep }) => {
       const jsonDataWithSetor = json.map((item) => {
         const encontrado = dataFromApi.find(
           (apiData) =>
-            apiData.PRODUTO === item.PRODUTO &&
-            apiData.LABORATORIO === item.LABORATORIO
+            apiData.PRODUTO.toUpperCase() === item.PRODUTO.toUpperCase() &&
+            apiData.LABORATORIO.toUpperCase() === item.LABORATORIO.toUpperCase()
         );
 
         const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
@@ -35,9 +35,6 @@ const FileUpload = ({ userCep }) => {
           SETOR_NEC_ABERTO: setor,
         };
       });
-
-      console.log(jsonDataWithSetor);
-
       setJsonData(jsonDataWithSetor);
     };
 
@@ -96,12 +93,16 @@ const FileUpload = ({ userCep }) => {
         console.log(encontrado);
 
         const parteDoMix = encontrado ? "Sim" : "Não";
+        const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
 
         return {
           ...item,
-          "Parte do Mix": parteDoMix,
+          "PARTE DO MIX": parteDoMix,
+          SETOR_NEC_ABERTO: setor,
         };
       });
+
+      console.log(updatedJsonData);
 
       setJsonData(updatedJsonData);
     } catch (error) {
@@ -112,7 +113,7 @@ const FileUpload = ({ userCep }) => {
   return (
     <div>
       <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Enviar</button>
+      <button onClick={handleUpload}>Comparar</button>
       {jsonData && (
         <Estoque
           jsonData={jsonData.map(({ SETOR_NEC_ABERTO, ...rest }) => rest)}
