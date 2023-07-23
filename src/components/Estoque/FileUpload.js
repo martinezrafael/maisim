@@ -114,11 +114,7 @@ const FileUpload = ({ userCep }) => {
     <div>
       <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
       <button onClick={handleUpload}>Comparar</button>
-      {jsonData && (
-        <Estoque
-          jsonData={jsonData.map(({ SETOR_NEC_ABERTO, ...rest }) => rest)}
-        />
-      )}
+      {jsonData && <Estoque jsonData={jsonData} />}
     </div>
   );
 };
