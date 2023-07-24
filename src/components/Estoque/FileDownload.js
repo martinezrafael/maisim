@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 
 const FileDownload = () => {
   // Cabeçalhos da planilha
-  const headers = ["EAN", "QUANTIDADE"];
+  const headers = ["EAN", "UNIDADES"];
 
   // Função para gerar a planilha Excel
   const generateExcel = () => {

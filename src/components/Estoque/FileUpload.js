@@ -3,10 +3,12 @@ import * as XLSX from "xlsx";
 import Estoque from "./Estoque";
 import { dataIqvia } from "../../api/iqvia.api";
 import FileDownload from "./FileDownload";
+import ShareEstoque from "./ShareEstoque";
 
 const FileUpload = ({ userCep }) => {
   //estado que armazena o json gerado com os dados da planilha de estoque
   const [jsonData, setJsonData] = useState(null);
+  const [showUnlockButtons, setShowUnlockButtons] = useState(false);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
@@ -46,24 +48,6 @@ const FileUpload = ({ userCep }) => {
     reader.readAsArrayBuffer(file);
   };
 
-  // Função para separar os dados pelo campo "SETOR_NEC_ABERTO"
-  const separateDataBySetor = () => {
-    if (!jsonData) return {};
-
-    const separatedData = {};
-
-    jsonData.forEach((item) => {
-      const setor = item.SETOR_NEC_ABERTO;
-      if (!separatedData[setor]) {
-        separatedData[setor] = [item];
-      } else {
-        separatedData[setor].push(item);
-      }
-    });
-
-    return separatedData;
-  };
-
   const handleUpload = async () => {
     try {
       const dataFromApi = await dataIqvia(userCep);
@@ -92,12 +76,10 @@ const FileUpload = ({ userCep }) => {
             apiData.LABORATORIO === item.LABORATORIO
         );
 
-        console.log(encontrado);
-
-        const parteDoMix = encontrado ? "Sim" : "Não";
+        const parteDoMix = encontrado ? "SIM" : "NÃO";
         const setor = encontrado
           ? encontrado.SETOR_NEC_ABERTO
-          : "NÃO FAZEM PARTE DO MIX";
+          : "NÃO IDENTIFICADO";
 
         return {
           ...item,
@@ -105,9 +87,7 @@ const FileUpload = ({ userCep }) => {
           SETOR_NEC_ABERTO: setor,
         };
       });
-
-      console.log(updatedJsonData);
-
+      setShowUnlockButtons(true);
       setJsonData(updatedJsonData);
     } catch (error) {
       console.error("Erro ao obter dados de brick:", error);
@@ -119,7 +99,12 @@ const FileUpload = ({ userCep }) => {
       <FileDownload />
       <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
       <button onClick={handleUpload}>Comparar</button>
-      {jsonData && <Estoque jsonData={jsonData} />}
+      {jsonData && (
+        <>
+          <Estoque jsonData={jsonData} showUnlockButtons={showUnlockButtons} />
+          <ShareEstoque jsonData={jsonData} />
+        </>
+      )}
     </div>
   );
 };

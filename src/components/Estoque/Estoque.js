@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 
-const Estoque = ({ jsonData }) => {
+const Estoque = ({ jsonData, showUnlockButtons }) => {
+  //armazena os itens que foram desbloqueados pelo usuário
   const [unlockedItems, setUnlockedItems] = useState([]);
+  //indica se a planilha de dados foi carregada ou não
   const [planilhaCarregada, setPlanilhaCarregada] = useState(false);
 
+  //Executada quando o usuário faz upload da planilha
   const handleFileChange = (e) => {
     setPlanilhaCarregada(true);
   };
 
+  //se não há dados no json e a planilha não foi carregada, essa mensagem é exibida
   if (!jsonData && !planilhaCarregada) {
     return (
       <div>
@@ -17,6 +21,7 @@ const Estoque = ({ jsonData }) => {
     );
   }
 
+  //Indica que os dados ainda estão sendo carregados
   if (!jsonData) {
     return <p>Carregando...</p>;
   }
@@ -56,7 +61,9 @@ const Estoque = ({ jsonData }) => {
                 <tr key={index}>
                   <td>{item.PRODUTO}</td>
                   <td>
-                    {index < 3 && !unlockedItems.includes(item) ? (
+                    {showUnlockButtons &&
+                    index < 3 &&
+                    !unlockedItems.includes(item) ? (
                       <button
                         onClick={() =>
                           setUnlockedItems([...unlockedItems, item])
@@ -69,7 +76,9 @@ const Estoque = ({ jsonData }) => {
                     )}
                   </td>
                   <td>
-                    {index < 3 && !unlockedItems.includes(item) ? (
+                    {showUnlockButtons &&
+                    index < 3 &&
+                    !unlockedItems.includes(item) ? (
                       <button
                         onClick={() =>
                           setUnlockedItems([...unlockedItems, item])

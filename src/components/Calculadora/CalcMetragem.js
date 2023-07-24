@@ -61,7 +61,7 @@ const CalcMetragem = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="metragem">Insira o seu m2</label>{" "}
+          <label htmlFor="metragem">Metragem (em m2)</label>{" "}
           <input
             type="text"
             required
@@ -73,7 +73,7 @@ const CalcMetragem = () => {
           />
         </div>
         <div>
-          <label htmlFor="faturamento">Insira o seu faturamento</label>{" "}
+          <label htmlFor="faturamento">Faturamento (aprox.)</label>{" "}
           <input
             type="text"
             required
@@ -104,7 +104,7 @@ const CalcMetragem = () => {
             ) : undefined}
           </div>
           <div>
-            <h3>Faturamento médio (aprox)</h3>
+            <h3>Faturamento médio (aprox.)</h3>
             {faturamentoIdeal !== undefined ? (
               <span>{faturamentoIdeal}</span>
             ) : undefined}

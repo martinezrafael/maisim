@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { dataIqvia } from "../../api/iqvia.api";
 import Cadeado from "../../images/icons/cadeado.svg";
+import diacritics from "diacritics"; // Importação da biblioteca diacritics
 
 const Top = ({ userCep }) => {
   const [data, setData] = useState([]);
-  const [isPaid, setIsPaid] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => {
@@ -20,13 +20,6 @@ const Top = ({ userCep }) => {
     fetchData();
   }, [userCep]);
 
-  const simulatePayment = () => {
-    // Simulando um pagamento bem-sucedido após 5 segundos
-    setTimeout(() => {
-      setIsPaid(true);
-    }, 5000);
-  };
-
   const handlePurchase = (item) => {
     // Lógica para realizar a compra do item
     setSelectedItems((prevSelectedItems) => {
@@ -37,17 +30,23 @@ const Top = ({ userCep }) => {
     });
   };
 
-  const totalQuantity = data.reduce((total, item) => total + item.UNIDADES, 0);
+  const formatSetor = (setor) => {
+    const withoutAccents = diacritics.remove(setor);
+    return (
+      withoutAccents.replace(/_/g, " ").charAt(0).toUpperCase() +
+      withoutAccents.slice(1).toLowerCase()
+    );
+  };
 
   const groupedData = data.reduce((acc, item) => {
     const { SETOR_NEC_ABERTO, UNIDADES } = item;
     if (!acc[SETOR_NEC_ABERTO]) {
       acc[SETOR_NEC_ABERTO] = {
-        setorTotalQuantity: UNIDADES, // Modificação feita aqui
+        setorTotalQuantity: UNIDADES,
         items: [item],
       };
     } else {
-      acc[SETOR_NEC_ABERTO].setorTotalQuantity += UNIDADES; // Modificação feita aqui
+      acc[SETOR_NEC_ABERTO].setorTotalQuantity += UNIDADES;
       acc[SETOR_NEC_ABERTO].items.push(item);
     }
     return acc;
@@ -56,10 +55,10 @@ const Top = ({ userCep }) => {
   return (
     <div>
       {Object.keys(groupedData).map((setor) => {
-        const { setorTotalQuantity, items } = groupedData[setor]; // Correção feita aqui
+        const { setorTotalQuantity, items } = groupedData[setor];
         return (
           <div key={setor}>
-            <h2>{setor}</h2>
+            <h2>{formatSetor(setor)}</h2>
             <table>
               <thead>
                 <tr>
@@ -70,7 +69,7 @@ const Top = ({ userCep }) => {
               </thead>
               <tbody>
                 {items.map((item, index) => {
-                  const isShowButton = index < 3 && !isPaid;
+                  const isShowButton = index < 3;
                   const isItemSelected = selectedItems.includes(item);
                   return (
                     <React.Fragment key={index}>
