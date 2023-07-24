@@ -11,11 +11,6 @@ const Top = ({ userCep }) => {
     const fetchData = async () => {
       try {
         const data = await dataIqvia(userCep);
-        console.log("Data from API:", data);
-        console.log(
-          "Total Quantity:",
-          data.reduce((total, item) => total + item.UNIDADES, 0)
-        );
         setData(data);
       } catch (error) {
         console.error("Erro ao obter dados:", error);
@@ -57,12 +52,6 @@ const Top = ({ userCep }) => {
     }
     return acc;
   }, {});
-
-  // Verificação dos valores de Share para cada item
-  data.forEach((item) => {
-    const share = (item.UNIDADES / totalQuantity) * 100;
-    console.log("Share:", share.toFixed(2));
-  });
 
   return (
     <div>

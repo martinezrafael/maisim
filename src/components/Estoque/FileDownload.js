@@ -3,7 +3,7 @@ import * as XLSX from "xlsx";
 
 const FileDownload = () => {
   // Cabeçalhos da planilha
-  const headers = ["PRODUTO", "LABORATORIO"];
+  const headers = ["EAN", "QUANTIDADE"];
 
   // Função para gerar a planilha Excel
   const generateExcel = () => {
@@ -24,7 +24,7 @@ const FileDownload = () => {
     const url = window.URL.createObjectURL(dataBlob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", "example.xlsx");
+    link.setAttribute("download", "estoque.xlsx");
     document.body.appendChild(link);
 
     link.click();

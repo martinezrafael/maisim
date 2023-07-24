@@ -5,6 +5,7 @@ import { dataIqvia } from "../../api/iqvia.api";
 import FileDownload from "./FileDownload";
 
 const FileUpload = ({ userCep }) => {
+  //estado que armazena o json gerado com os dados da planilha de estoque
   const [jsonData, setJsonData] = useState(null);
 
   const handleFileChange = async (e) => {
@@ -23,16 +24,20 @@ const FileUpload = ({ userCep }) => {
 
       const jsonDataWithSetor = json.map((item) => {
         const encontrado = dataFromApi.find(
-          (apiData) =>
-            apiData.PRODUTO.toUpperCase() === item.PRODUTO.toUpperCase() &&
-            apiData.LABORATORIO.toUpperCase() === item.LABORATORIO.toUpperCase()
+          (apiData) => apiData.EAN.toString() === item.EAN.toString()
         );
 
         const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
+        const produto = encontrado ? encontrado.PRODUTO : "";
+        const unidades = encontrado ? encontrado.UNIDADES : 0;
+        const laboratorio = encontrado ? encontrado.LABORATORIO : "";
 
         return {
           ...item,
           SETOR_NEC_ABERTO: setor,
+          PRODUTO: produto,
+          UNIDADES: unidades,
+          LABORATORIO: laboratorio,
         };
       });
       setJsonData(jsonDataWithSetor);
@@ -62,7 +67,6 @@ const FileUpload = ({ userCep }) => {
   const handleUpload = async () => {
     try {
       const dataFromApi = await dataIqvia(userCep);
-      console.log(dataFromApi);
 
       // Converter os nomes e laboratórios da planilha para letras maiúsculas e sem espaços em branco extras
       const jsonDataUpperCase = jsonData.map((item) => ({
