@@ -89,7 +89,7 @@ const TableWrapper = styled.div`
   padding: 60px;
 
   @media screen and (max-width: 768px) {
-    padding: 10;
+    padding: 20px 10px;
   }
 `;
 
@@ -105,11 +105,24 @@ const TableTitle = styled.h2`
   }
 `;
 
+const TableTitleMobile = styled.span`
+  display: none;
+
+  @media screen and (max-width: 500px) {
+    display: block;
+    margin-bottom: 8px;
+  }
+`;
+
 const TableHead = styled.th`
   font-size: 24px;
   font-weight: 700;
   padding: 12px 0;
   width: 100%;
+  @media screen and (max-width: 768px) {
+    display: none;
+    width: 100%;
+  }
 `;
 
 const TableRow = styled.tr`
@@ -124,10 +137,11 @@ const TableData = styled.td`
   font-weight: 700;
   font-size: 18px;
 
-  @media screen and (max-width: 768px) {
-    padding: 10px;
+  @media screen and (max-width: 500px) {
     font-size: 14px;
     font-weight: 400;
+    display: block;
+    width: 100%;
   }
 `;
 
@@ -260,7 +274,12 @@ const Top = ({ userCep }) => {
                                 Desbloquear comparação
                               </TableButton>
                             ) : (
-                              item.LABORATORIO
+                              <>
+                                <TableTitleMobile>
+                                  Laboratório:
+                                </TableTitleMobile>
+                                {item.LABORATORIO}
+                              </>
                             )}
                           </TableData>
                           <TableData>
@@ -273,7 +292,10 @@ const Top = ({ userCep }) => {
                                 Desbloquear comparação
                               </TableButton>
                             ) : (
-                              <>{item.REPRESENTACAO}%</>
+                              <>
+                                <TableTitleMobile>Share:</TableTitleMobile>
+                                {item.REPRESENTACAO}%
+                              </>
                             )}
                           </TableData>
                         </TableRow>
