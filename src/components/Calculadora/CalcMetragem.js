@@ -51,16 +51,25 @@ const InputElement = styled.input`
   display: block;
   padding: 18px;
   border-radius: 12px;
+  font-size: 18px;
   background: #fff;
   border: none;
 `;
 
 const Btn = styled.input`
-  padding: 12px;
+  padding: 18px;
   border-radius: 12px;
+  border: none;
   color: #fff;
-  background: #3a1b48;
-  width: 100%;
+  background: radial-gradient(
+    106.63% 107.48% at 0% 0%,
+    #fc46c2 0%,
+    #8d4aab 100%
+  );
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 700;
+  width: 50%;
   cursor: pointer;
 `;
 
