@@ -6,6 +6,7 @@ const HeaderElement = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const Header = () => {
