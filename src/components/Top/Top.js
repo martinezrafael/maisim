@@ -53,64 +53,76 @@ const Top = ({ userCep }) => {
   }, {});
 
   return (
-    <div>
-      {Object.keys(groupedData).map((setor) => {
-        const { setorTotalQuantity, items } = groupedData[setor];
-        return (
-          <div key={setor}>
-            <h2>{formatSetor(setor)}</h2>
-            <table>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>Laboratório</th>
-                  <th>Share</th>
-                </tr>
-              </thead>
-              <tbody>
-                {items.map((item, index) => {
-                  const isShowButton = index < 3;
-                  const isItemSelected = selectedItems.includes(item);
-                  return (
-                    <React.Fragment key={index}>
-                      <tr className={`item-${(index += 1)}`}>
-                        <td>{item.PRODUTO}</td>
-                        <td>
-                          {isShowButton && !isItemSelected ? (
-                            <button onClick={() => handlePurchase(item)}>
-                              <img src={Cadeado} alt="Desbloquear comparação" />
-                              Desbloquear comparação
-                            </button>
-                          ) : (
-                            item.LABORATORIO
-                          )}
-                        </td>
-                        <td>
-                          {isShowButton && !isItemSelected ? (
-                            <button onClick={() => handlePurchase(item)}>
-                              <img src={Cadeado} alt="Desbloquear comparação" />
-                              Desbloquear comparação
-                            </button>
-                          ) : (
-                            <>
-                              {(
-                                (item.UNIDADES / setorTotalQuantity) *
-                                100
-                              ).toFixed(2)}
-                              %
-                            </>
-                          )}
-                        </td>
-                      </tr>
-                    </React.Fragment>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div>
+        <h2>Comparativo 2</h2>
+        <p>Você vs. Mercado</p>
+      </div>
+      <div>
+        {Object.keys(groupedData).map((setor) => {
+          const { setorTotalQuantity, items } = groupedData[setor];
+          return (
+            <div key={setor}>
+              <h2>{formatSetor(setor)}</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nome</th>
+                    <th>Laboratório</th>
+                    <th>Share</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items.map((item, index) => {
+                    const isShowButton = index < 3;
+                    const isItemSelected = selectedItems.includes(item);
+                    return (
+                      <React.Fragment key={index}>
+                        <tr className={`item-${(index += 1)}`}>
+                          <td>{item.PRODUTO}</td>
+                          <td>
+                            {isShowButton && !isItemSelected ? (
+                              <button onClick={() => handlePurchase(item)}>
+                                <img
+                                  src={Cadeado}
+                                  alt="Desbloquear comparação"
+                                />
+                                Desbloquear comparação
+                              </button>
+                            ) : (
+                              item.LABORATORIO
+                            )}
+                          </td>
+                          <td>
+                            {isShowButton && !isItemSelected ? (
+                              <button onClick={() => handlePurchase(item)}>
+                                <img
+                                  src={Cadeado}
+                                  alt="Desbloquear comparação"
+                                />
+                                Desbloquear comparação
+                              </button>
+                            ) : (
+                              <>
+                                {(
+                                  (item.UNIDADES / setorTotalQuantity) *
+                                  100
+                                ).toFixed(2)}
+                                %
+                              </>
+                            )}
+                          </td>
+                        </tr>
+                      </React.Fragment>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

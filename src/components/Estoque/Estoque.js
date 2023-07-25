@@ -44,59 +44,61 @@ const Estoque = ({ jsonData, showUnlockButtons }) => {
   const separatedData = separateDataBySetor();
 
   return (
-    <div>
-      {Object.entries(separatedData).map(([setor, data]) => (
-        <div key={setor}>
-          <h2>{setor}</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Laboratório</th>
-                <th>Parte do Mix</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.PRODUTO}</td>
-                  <td>
-                    {showUnlockButtons &&
-                    index < 3 &&
-                    !unlockedItems.includes(item) ? (
-                      <button
-                        onClick={() =>
-                          setUnlockedItems([...unlockedItems, item])
-                        }
-                      >
-                        Desbloquear
-                      </button>
-                    ) : (
-                      item.LABORATORIO
-                    )}
-                  </td>
-                  <td>
-                    {showUnlockButtons &&
-                    index < 3 &&
-                    !unlockedItems.includes(item) ? (
-                      <button
-                        onClick={() =>
-                          setUnlockedItems([...unlockedItems, item])
-                        }
-                      >
-                        Desbloquear
-                      </button>
-                    ) : (
-                      item["PARTE DO MIX"]
-                    )}
-                  </td>
+    <>
+      <div>
+        {Object.entries(separatedData).map(([setor, data]) => (
+          <div key={setor}>
+            <h2>{setor}</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Laboratório</th>
+                  <th>Parte do Mix</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ))}
-    </div>
+              </thead>
+              <tbody>
+                {data.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.PRODUTO}</td>
+                    <td>
+                      {showUnlockButtons &&
+                      index < 3 &&
+                      !unlockedItems.includes(item) ? (
+                        <button
+                          onClick={() =>
+                            setUnlockedItems([...unlockedItems, item])
+                          }
+                        >
+                          Desbloquear
+                        </button>
+                      ) : (
+                        item.LABORATORIO
+                      )}
+                    </td>
+                    <td>
+                      {showUnlockButtons &&
+                      index < 3 &&
+                      !unlockedItems.includes(item) ? (
+                        <button
+                          onClick={() =>
+                            setUnlockedItems([...unlockedItems, item])
+                          }
+                        >
+                          Desbloquear
+                        </button>
+                      ) : (
+                        item["PARTE DO MIX"]
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ))}
+      </div>
+    </>
   );
 };
 

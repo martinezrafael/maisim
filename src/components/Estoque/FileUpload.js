@@ -95,17 +95,30 @@ const FileUpload = ({ userCep }) => {
   };
 
   return (
-    <div>
-      <FileDownload />
-      <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Comparar</button>
-      {jsonData && (
-        <>
-          <Estoque jsonData={jsonData} showUnlockButtons={showUnlockButtons} />
-          <ShareEstoque jsonData={jsonData} />
-        </>
-      )}
-    </div>
+    <>
+      <div>
+        <h2>Comparativo 3</h2>
+        <p>Você vs. Mercado</p>
+      </div>
+      <div>
+        <p>
+          Verifique a compatibilidade do seu estoque com o mix da sua região e
+          veja qual é o potencial do seu estoque.
+        </p>
+        <FileDownload />
+        <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
+        <button onClick={handleUpload}>Comparar</button>
+        {jsonData && (
+          <>
+            <Estoque
+              jsonData={jsonData}
+              showUnlockButtons={showUnlockButtons}
+            />
+            <ShareEstoque jsonData={jsonData} />
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

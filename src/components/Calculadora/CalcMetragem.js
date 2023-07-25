@@ -59,6 +59,10 @@ const CalcMetragem = () => {
 
   return (
     <div>
+      <div>
+        <h2>Comparativo 1</h2>
+        <p>Você vs. Mercado</p>
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="metragem">Metragem (em m2)</label>{" "}
