@@ -110,7 +110,7 @@ const TableTitleMobile = styled.span`
 
   @media screen and (max-width: 500px) {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -128,6 +128,11 @@ const TableHead = styled.th`
 const TableRow = styled.tr`
   background: #1f002a;
   border-radius: 20px;
+
+  @media screen and (max-width: 500px) {
+    padding: 8px;
+    width: 100%;
+  }
 `;
 
 const TableData = styled.td`
@@ -140,7 +145,9 @@ const TableData = styled.td`
   @media screen and (max-width: 500px) {
     font-size: 14px;
     font-weight: 400;
+    padding: 0;
     display: block;
+    margin-bottom: 14px;
     width: 100%;
   }
 `;
@@ -160,6 +167,11 @@ const TableButton = styled.button`
   align-items: center;
   gap: 8px;
   padding: 10px;
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 10px;
+    width: 100%;
+  }
 `;
 
 const Top = ({ userCep }) => {

@@ -12,6 +12,11 @@ const BtnElement = styled.button`
   margin-top: 32px;
   padding: 10px;
   cursor: pointer;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 20px 40px;
+  }
 `;
 
 const Button = () => {
