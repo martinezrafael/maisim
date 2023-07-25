@@ -4,12 +4,28 @@ import { getAccessToken } from "../../api/learnwords.api";
 import Top from "../Top/Top";
 import FileUpload from "../Estoque/FileUpload";
 import CalcMetragem from "../Calculadora/CalcMetragem";
+import styled from "styled-components";
+
+const UserName = styled.h3`
+  color: #3a1b48;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  margin-top: 20px;
+`;
+
+const UserCnpj = styled.span`
+  color: #3a1b48;
+  font-size: 24px;
+`;
 
 const User = () => {
   const [userData, setUserData] = useState(null);
   const userID = "645d26578b32d0158402b142";
   const clientId = process.env.REACT_APP_CLIENT_ID;
   const endpoint = `${process.env.REACT_APP_API_URL}/admin/api/v2/users/${userID}`;
+
+  console.log(userData);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -33,7 +49,7 @@ const User = () => {
     <div>
       {userData !== null ? (
         <div>
-          <p>{userData.username}</p>
+          <UserName>{userData.username}</UserName>
           <span>{userData.billing_info.bf_postalcode}</span>
           <CalcMetragem />
           <Top userCep={userData.billing_info.bf_postalcode.replace("-", "")} />
