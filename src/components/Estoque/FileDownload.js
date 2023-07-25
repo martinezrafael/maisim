@@ -1,5 +1,20 @@
 import React from "react";
 import * as XLSX from "xlsx";
+import styled from "styled-components";
+
+const DownloadBtn = styled.button`
+  background: #2da555;
+  border-radius: 12px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 12px;
+  text-transform: uppercase;
+  width: 300px;
+  margin-top: 8px;
+`;
 
 const FileDownload = () => {
   // Cabeçalhos da planilha
@@ -46,7 +61,7 @@ const FileDownload = () => {
 
   return (
     <div>
-      <button onClick={generateExcel}>Baixar</button>
+      <DownloadBtn onClick={generateExcel}>Baixar</DownloadBtn>
     </div>
   );
 };

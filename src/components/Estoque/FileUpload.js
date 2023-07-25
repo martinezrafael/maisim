@@ -30,6 +30,59 @@ const SubTitle = styled.p`
   margin: 0;
 `;
 
+//Download
+const DownloadWrapper = styled.div`
+  background: radial-gradient(
+    106.63% 107.48% at 0% 0%,
+    #fc46c2 0%,
+    #8d4aab 100%
+  );
+  border-radius: 20px;
+  color: #fff;
+  padding: 20px;
+  margin-bottom: 40px;
+`;
+
+const DownloadDescription = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+`;
+
+//Upload
+const UploadWrapper = styled.div`
+  padding: 20px 0;
+`;
+
+const UploadDescription = styled.p`
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 8px;
+`;
+
+const InputFile = styled.input`
+  padding: 12px;
+  background: #ddd;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 12px 0px 0px 12px;
+`;
+
+const Btn = styled.button`
+  background: radial-gradient(
+    106.63% 107.48% at 0% 0%,
+    #fc46c2 0%,
+    #8d4aab 100%
+  );
+  border-color: #8d4aab;
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 0px 12px 12px 0px;
+`;
+
 const FileUpload = ({ userCep }) => {
   //estado que armazena o json gerado com os dados da planilha de estoque
   const [jsonData, setJsonData] = useState(null);
@@ -126,14 +179,25 @@ const FileUpload = ({ userCep }) => {
         <SubTitle>Você vs. Mercado</SubTitle>
       </BoxTitle>
       <div>
-        <div>
-          <p>
-            Baixe a planilha e compare seu estoque com o de seus concorrentes.
-          </p>
+        <DownloadWrapper>
+          <DownloadDescription>
+            Baixe a planilha e preencha com os dados do seu estoque: EAN e
+            QUANTIDADE
+          </DownloadDescription>
           <FileDownload />
-        </div>
-        <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
-        <button onClick={handleUpload}>Comparar</button>
+        </DownloadWrapper>
+        <UploadWrapper>
+          <UploadDescription>
+            Faça upload da planilha que você preencheu e clique em comparar para
+            fazer uma análise do seu estoque.
+          </UploadDescription>
+          <InputFile
+            type="file"
+            accept=".xls, .xlsx"
+            onChange={handleFileChange}
+          />
+          <Btn onClick={handleUpload}>Comparar</Btn>
+        </UploadWrapper>
         {jsonData && (
           <>
             <Estoque

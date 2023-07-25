@@ -1,17 +1,39 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const TableWrapper = styled.div`
+  border: 3px solid #6f3789;
+  border-radius: 20px;
+  padding: 60px;
+`;
 
 const Estoque = ({ jsonData, showUnlockButtons }) => {
-  //armazena os itens que foram desbloqueados pelo usuário
   const [unlockedItems, setUnlockedItems] = useState([]);
-  //indica se a planilha de dados foi carregada ou não
   const [planilhaCarregada, setPlanilhaCarregada] = useState(false);
 
-  //Executada quando o usuário faz upload da planilha
+  const formatSetor = (setor) => {
+    const lowerCaseSetor = setor.toLowerCase();
+
+    if (lowerCaseSetor === "generico") {
+      return "Genérico";
+    } else if (lowerCaseSetor === "nao_medicamento") {
+      return "Não Medicamento";
+    } else if (lowerCaseSetor === "otc_referencia") {
+      return "OTC Referência";
+    } else if (lowerCaseSetor === "referencia") {
+      return "Referência";
+    } else if (lowerCaseSetor === "similar") {
+      return "Similar";
+    } else {
+      // Caso não corresponda a nenhum dos nomes específicos, retorna o próprio setor
+      return setor;
+    }
+  };
+
   const handleFileChange = (e) => {
     setPlanilhaCarregada(true);
   };
 
-  //se não há dados no json e a planilha não foi carregada, essa mensagem é exibida
   if (!jsonData && !planilhaCarregada) {
     return (
       <div>
@@ -21,12 +43,10 @@ const Estoque = ({ jsonData, showUnlockButtons }) => {
     );
   }
 
-  //Indica que os dados ainda estão sendo carregados
   if (!jsonData) {
     return <p>Carregando...</p>;
   }
 
-  // Função para separar os dados pelo campo "SETOR_NEC_ABERTO"
   const separateDataBySetor = () => {
     const separatedData = {};
 
@@ -44,11 +64,11 @@ const Estoque = ({ jsonData, showUnlockButtons }) => {
   const separatedData = separateDataBySetor();
 
   return (
-    <>
-      <div>
+    <div>
+      <TableWrapper>
         {Object.entries(separatedData).map(([setor, data]) => (
           <div key={setor}>
-            <h2>{setor}</h2>
+            <h2>{formatSetor(setor)}</h2>
             <table>
               <thead>
                 <tr>
@@ -97,8 +117,8 @@ const Estoque = ({ jsonData, showUnlockButtons }) => {
             </table>
           </div>
         ))}
-      </div>
-    </>
+      </TableWrapper>
+    </div>
   );
 };
 

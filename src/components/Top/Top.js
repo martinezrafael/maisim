@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { dataIqvia } from "../../api/iqvia.api";
 import Cadeado from "../../images/icons/cadeado.svg";
 import Sacola from "../../images/icons/sacola.svg";
-import diacritics from "diacritics";
 import styled from "styled-components";
 
 const BoxTitle = styled.div`
@@ -105,6 +104,7 @@ const TableButton = styled.button`
     #8d4aab 100%
   );
   border-radius: 12px;
+  border: none;
   cursor: pointer;
   color: #fff;
   font-size: 16px;
