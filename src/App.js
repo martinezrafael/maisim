@@ -1,16 +1,19 @@
 import "./App.css";
 import React, { useState } from "react";
-import Estoque from "./components/Estoque/Estoque";
 import User from "./components/User/User";
-import FileUpload from "./components/Estoque/FileUpload";
+import styled from "styled-components";
 
 function App() {
   const [jsonData, setJsonData] = useState(null);
 
+  const App = styled.div`
+    background: #ebebff;
+  `;
+
   return (
-    <div className="App">
+    <App className="App">
       <User />
-    </div>
+    </App>
   );
 }
 
