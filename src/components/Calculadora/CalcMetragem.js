@@ -23,19 +23,19 @@ const BoxTitle = styled.div`
 
 const Title = styled.h2`
   color: #3a1b48;
-  font-size: 2rem; /* Alterado o tamanho da fonte */
+  font-size: 2rem;
   font-weight: 700;
   margin: 0;
 `;
 
 const SubTitle = styled.p`
   color: #3a1b48;
-  font-size: 1.5rem; /* Alterado o tamanho da fonte */
+  font-size: 1.5rem;
   margin: 0;
 `;
 
 const FormElement = styled.form`
-  max-width: 400px;
+  max-width: 600px;
   padding: 20px 0px;
 
   @media screen and (max-width: 500px) {

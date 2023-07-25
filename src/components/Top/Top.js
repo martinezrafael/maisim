@@ -40,7 +40,9 @@ const DescriptionWrapper = styled.div`
   padding: 40px 0;
 
   @media screen and (max-width: 768px) {
-    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 0;
   }
 `;
 
@@ -49,6 +51,7 @@ const DescriptionIcon = styled.img`
   margin-right: 40px;
 
   @media screen and (max-width: 768px) {
+    margin-right: 10px;
     width: 60px;
   }
 `;
@@ -89,7 +92,8 @@ const TableWrapper = styled.div`
   padding: 60px;
 
   @media screen and (max-width: 768px) {
-    padding: 20px 10px;
+    padding: 0;
+    width: 100%;
   }
 `;
 
@@ -130,7 +134,6 @@ const TableRow = styled.tr`
   border-radius: 20px;
 
   @media screen and (max-width: 500px) {
-    padding: 8px;
     width: 100%;
   }
 `;
