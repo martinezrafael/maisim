@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import GraficoPotencial from "./GraficoPotencial";
 import styled from "styled-components";
 
+const Container = styled.div`
+  maw-width: 90%;
+  margin: 0 auto;
+  margin-bottom: 60px;
+`;
+
 const BoxTitle = styled.div`
   padding: 12px;
   border: 3px solid #6f3789;
@@ -25,7 +31,7 @@ const SubTitle = styled.p`
 `;
 
 const FormElement = styled.form`
-  max-width: 60%;
+  max-width: 400px;
   padding: 20px 0px;
 `;
 
@@ -48,22 +54,28 @@ const InputElement = styled.input`
 `;
 
 const Btn = styled.input`
-  padding: 8px;
+  padding: 12px;
   border-radius: 12px;
   color: #fff;
   background: #3a1b48;
+  width: 100%;
+  cursor: pointer;
 `;
 
 //Show Datas
 const TitleShowDatas = styled.h3`
   color: #3a1b48;
-  font-size: 32px;
+  font-size: 18px;
 `;
 
 const DataShowElement = styled.span`
   font-size: 40px;
   font-weight: 900;
   color: #3a1b48;
+`;
+
+const GraphicWrapper = styled.div`
+  max-width: 400px;
 `;
 
 const CalcMetragem = () => {
@@ -123,7 +135,7 @@ const CalcMetragem = () => {
   };
 
   return (
-    <div>
+    <Container>
       <BoxTitle>
         <Title>Comparativo 1</Title>
         <SubTitle>Você vs. Mercado</SubTitle>
@@ -172,14 +184,14 @@ const CalcMetragem = () => {
             ) : undefined}
           </div>
         </div>
-        <div>
+        <GraphicWrapper>
           <TitleShowDatas>Potencial de Faturamento</TitleShowDatas>
           {potencialFaturamento !== undefined ? (
             <GraficoPotencial data={potencialFaturamento} />
           ) : undefined}
-        </div>
+        </GraphicWrapper>
       </div>
-    </div>
+    </Container>
   );
 };
 
