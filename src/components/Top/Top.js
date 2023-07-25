@@ -239,13 +239,7 @@ const Top = ({ userCep }) => {
                                 Desbloquear comparação
                               </TableButton>
                             ) : (
-                              <>
-                                {(
-                                  (item.UNIDADES / setorTotalQuantity) *
-                                  100
-                                ).toFixed(2)}
-                                %
-                              </>
+                              <>{item.REPRESENTACAO}%</>
                             )}
                           </TableData>
                         </TableRow>
