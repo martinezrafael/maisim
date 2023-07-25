@@ -20,11 +20,13 @@ const Title = styled.h2`
   color: #3a1b48;
   font-size: 32px;
   font-weight: 700;
+  margin: 0;
 `;
 
 const SubTitle = styled.p`
   color: #3a1b48;
   font-size: 24px;
+  margin: 0;
 `;
 
 //Descrição da seção
@@ -76,6 +78,42 @@ const TableTitle = styled.h2`
   margin-bottom: 20px;
 `;
 
+const TableHead = styled.th`
+  font-size: 24px;
+  font-weight: 700;
+  padding: 12px 0;
+`;
+
+const TableRow = styled.tr`
+  background: #1f002a;
+  border-radius: 20px;
+`;
+
+const TableData = styled.td`
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  width: 240px;
+`;
+
+const TableButton = styled.button`
+  background: radial-gradient(
+    106.63% 107.48% at 0% 0%,
+    #fc46c2 0%,
+    #8d4aab 100%
+  );
+  border-radius: 12px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+`;
+
 const Top = ({ userCep }) => {
   const [data, setData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -104,11 +142,22 @@ const Top = ({ userCep }) => {
   };
 
   const formatSetor = (setor) => {
-    const withoutAccents = diacritics.remove(setor);
-    return (
-      withoutAccents.replace(/_/g, " ").charAt(0).toUpperCase() +
-      withoutAccents.slice(1).toLowerCase()
-    );
+    const lowerCaseSetor = setor.toLowerCase();
+
+    if (lowerCaseSetor === "generico") {
+      return "Genérico";
+    } else if (lowerCaseSetor === "nao_medicamento") {
+      return "Não Medicamento";
+    } else if (lowerCaseSetor === "otc_referencia") {
+      return "OTC Referência";
+    } else if (lowerCaseSetor === "referencia") {
+      return "Referência";
+    } else if (lowerCaseSetor === "similar") {
+      return "Similar";
+    } else {
+      // Caso não corresponda a nenhum dos nomes específicos, retorna o próprio setor
+      return setor;
+    }
   };
 
   const groupedData = data.reduce((acc, item) => {
@@ -124,6 +173,8 @@ const Top = ({ userCep }) => {
     }
     return acc;
   }, {});
+
+  console.log(groupedData);
 
   return (
     <>
@@ -152,9 +203,9 @@ const Top = ({ userCep }) => {
               <table>
                 <thead>
                   <tr>
-                    <th>Nome</th>
-                    <th>Laboratório</th>
-                    <th>Share</th>
+                    <TableHead>Nome</TableHead>
+                    <TableHead>Laboratório</TableHead>
+                    <TableHead>Share</TableHead>
                   </tr>
                 </thead>
                 <tbody>
@@ -163,30 +214,30 @@ const Top = ({ userCep }) => {
                     const isItemSelected = selectedItems.includes(item);
                     return (
                       <React.Fragment key={index}>
-                        <tr className={`item-${(index += 1)}`}>
-                          <td>{item.PRODUTO}</td>
-                          <td>
+                        <TableRow className={`item-${(index += 1)}`}>
+                          <TableData>{item.PRODUTO}</TableData>
+                          <TableData>
                             {isShowButton && !isItemSelected ? (
-                              <button onClick={() => handlePurchase(item)}>
+                              <TableButton onClick={() => handlePurchase(item)}>
                                 <img
                                   src={Cadeado}
                                   alt="Desbloquear comparação"
                                 />
                                 Desbloquear comparação
-                              </button>
+                              </TableButton>
                             ) : (
                               item.LABORATORIO
                             )}
-                          </td>
-                          <td>
+                          </TableData>
+                          <TableData>
                             {isShowButton && !isItemSelected ? (
-                              <button onClick={() => handlePurchase(item)}>
+                              <TableButton onClick={() => handlePurchase(item)}>
                                 <img
                                   src={Cadeado}
                                   alt="Desbloquear comparação"
                                 />
                                 Desbloquear comparação
-                              </button>
+                              </TableButton>
                             ) : (
                               <>
                                 {(
@@ -196,8 +247,8 @@ const Top = ({ userCep }) => {
                                 %
                               </>
                             )}
-                          </td>
-                        </tr>
+                          </TableData>
+                        </TableRow>
                       </React.Fragment>
                     );
                   })}

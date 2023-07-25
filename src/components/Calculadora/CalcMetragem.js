@@ -23,11 +23,13 @@ const Title = styled.h2`
   color: #3a1b48;
   font-size: 32px;
   font-weight: 700;
+  margin: 0;
 `;
 
 const SubTitle = styled.p`
   color: #3a1b48;
   font-size: 24px;
+  margin: 0;
 `;
 
 const FormElement = styled.form`

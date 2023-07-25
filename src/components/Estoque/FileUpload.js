@@ -4,6 +4,31 @@ import Estoque from "./Estoque";
 import { dataIqvia } from "../../api/iqvia.api";
 import FileDownload from "./FileDownload";
 import ShareEstoque from "./ShareEstoque";
+import styled from "styled-components";
+
+const BoxTitle = styled.div`
+  padding: 12px;
+  border: 3px solid #6f3789;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+`;
+
+const Title = styled.h2`
+  color: #3a1b48;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+`;
+
+const SubTitle = styled.p`
+  color: #3a1b48;
+  font-size: 24px;
+  margin: 0;
+`;
 
 const FileUpload = ({ userCep }) => {
   //estado que armazena o json gerado com os dados da planilha de estoque
@@ -96,16 +121,17 @@ const FileUpload = ({ userCep }) => {
 
   return (
     <>
+      <BoxTitle>
+        <Title>Comparativo 3</Title>
+        <SubTitle>Você vs. Mercado</SubTitle>
+      </BoxTitle>
       <div>
-        <h2>Comparativo 3</h2>
-        <p>Você vs. Mercado</p>
-      </div>
-      <div>
-        <p>
-          Verifique a compatibilidade do seu estoque com o mix da sua região e
-          veja qual é o potencial do seu estoque.
-        </p>
-        <FileDownload />
+        <div>
+          <p>
+            Baixe a planilha e compare seu estoque com o de seus concorrentes.
+          </p>
+          <FileDownload />
+        </div>
         <input type="file" accept=".xls, .xlsx" onChange={handleFileChange} />
         <button onClick={handleUpload}>Comparar</button>
         {jsonData && (
