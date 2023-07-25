@@ -5,8 +5,12 @@ import Home from "./components/Pages/Home";
 import styled from "styled-components";
 
 const AppElement = styled.div`
-  max-width: 90%;
+  max-width: 60%;
   margin: auto;
+
+  @media screen and (max-width: 768px) {
+    max-width: 94%;
+  }
 `;
 
 function App() {

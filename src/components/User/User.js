@@ -6,12 +6,24 @@ import FileUpload from "../Estoque/FileUpload";
 import CalcMetragem from "../Calculadora/CalcMetragem";
 import styled from "styled-components";
 
+const UserInfos = styled.div`
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
 const UserName = styled.h3`
   color: #3a1b48;
   font-size: 32px;
   font-weight: 700;
   margin: 0;
   margin-top: 20px;
+
+  @media screen and (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const UserCnpj = styled.span`
@@ -48,7 +60,7 @@ const User = () => {
   return (
     <div>
       {userData !== null ? (
-        <div>
+        <UserInfos>
           <UserName>{userData.username}</UserName>
           <span>{userData.billing_info.bf_postalcode}</span>
           <CalcMetragem />
@@ -56,7 +68,7 @@ const User = () => {
           <FileUpload
             userCep={userData.billing_info.bf_postalcode.replace("-", "")}
           />
-        </div>
+        </UserInfos>
       ) : (
         <p>Usuário não Encontrado</p>
       )}

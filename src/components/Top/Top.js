@@ -38,11 +38,19 @@ const DescriptionWrapper = styled.div`
   max-width: 400px;
   margin: auto;
   padding: 40px 0;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const DescriptionIcon = styled.img`
   width: 100px;
   margin-right: 40px;
+
+  @media screen and (max-width: 768px) {
+    width: 60px;
+  }
 `;
 
 const DescriptionTitle = styled.h3`
@@ -50,12 +58,22 @@ const DescriptionTitle = styled.h3`
   font-size: 32px;
   font-weight: 700;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 8px;
+  }
 `;
 
 const DescriptionParagraph = styled.p`
   color: #1f002a;
   font-size: 18px;
   margin: 0;
+
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
 `;
 
 //Tabelas
@@ -69,6 +87,10 @@ const TableWrapper = styled.div`
   color: #fff;
   margin-bottom: 20px;
   padding: 60px;
+
+  @media screen and (max-width: 768px) {
+    padding: 10;
+  }
 `;
 
 const TableTitle = styled.h2`
@@ -76,6 +98,11 @@ const TableTitle = styled.h2`
   margin: 0;
   margin-bottom: 20px;
   text-align: center;
+
+  @media screen and (max-width: 768px) {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
 `;
 
 const TableHead = styled.th`
@@ -96,6 +123,12 @@ const TableData = styled.td`
   border: none;
   font-weight: 700;
   font-size: 18px;
+
+  @media screen and (max-width: 768px) {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
 
 const TableButton = styled.button`

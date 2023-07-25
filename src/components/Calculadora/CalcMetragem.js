@@ -3,9 +3,11 @@ import GraficoPotencial from "./GraficoPotencial";
 import styled from "styled-components";
 
 const Container = styled.div`
-  max-width: 90%;
-  margin: 0 auto;
   margin-bottom: 60px;
+
+  @media screen and (max-width: 768px) {
+    margin-bottom: 40px;
+  }
 `;
 
 const BoxTitle = styled.div`
@@ -21,25 +23,30 @@ const BoxTitle = styled.div`
 
 const Title = styled.h2`
   color: #3a1b48;
-  font-size: 32px;
+  font-size: 2rem; /* Alterado o tamanho da fonte */
   font-weight: 700;
   margin: 0;
 `;
 
 const SubTitle = styled.p`
   color: #3a1b48;
-  font-size: 24px;
+  font-size: 1.5rem; /* Alterado o tamanho da fonte */
   margin: 0;
 `;
 
 const FormElement = styled.form`
   max-width: 400px;
   padding: 20px 0px;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding: 0;
+  }
 `;
 
 const LabelElement = styled.label`
   color: #3a1b48;
-  font-size: 18px;
+  font-size: 1rem;
 `;
 
 const InputWrapper = styled.div`
@@ -51,9 +58,13 @@ const InputElement = styled.input`
   display: block;
   padding: 18px;
   border-radius: 12px;
-  font-size: 18px;
+  font-size: 16px;
   background: #fff;
   border: none;
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 const Btn = styled.input`
@@ -66,27 +77,39 @@ const Btn = styled.input`
     #fc46c2 0%,
     #8d4aab 100%
   );
-  font-size: 18px;
+  font-size: 1rem; /* Alterado o tamanho da fonte */
   text-transform: uppercase;
   font-weight: 700;
-  width: 50%;
+  width: 100%; /* O botão ocupará toda a largura da tela */
   cursor: pointer;
 `;
 
 // Show Datas
 const TitleShowDatas = styled.h3`
   color: #3a1b48;
-  font-size: 18px;
+  font-size: 1rem; /* Alterado o tamanho da fonte */
 `;
 
 const DataShowElement = styled.span`
-  font-size: 40px;
+  font-size: 2.5rem; /* Alterado o tamanho da fonte */
   font-weight: 900;
   color: #3a1b48;
 `;
 
 const GraphicWrapper = styled.div`
-  max-width: 400px;
+  width: 100%;
+  text-align: center;
+`;
+
+const ElementFlex = styled.div`
+  display: flex;
+  align-items: top;
+  justify-content: space-around;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const CalcMetragem = () => {
@@ -146,57 +169,61 @@ const CalcMetragem = () => {
         <Title>Comparativo 1</Title>
         <SubTitle>Você vs. Mercado</SubTitle>
       </BoxTitle>
-      <FormElement onSubmit={handleSubmit}>
-        <InputWrapper>
-          <LabelElement htmlFor="metragem">Metragem (em m2)</LabelElement>{" "}
-          <InputElement
-            type="text"
-            required
-            id="metragem"
-            value={metragemComercial}
-            onChange={(event) =>
-              setMetragemComercial(Number(event.target.value).toLocaleString())
-            }
-          />
-        </InputWrapper>
-        <InputWrapper>
-          <LabelElement htmlFor="faturamento">
-            Faturamento (aprox.)
-          </LabelElement>{" "}
-          <InputElement
-            type="text"
-            required
-            id="faturamento"
-            value={faturamentoUsuario}
-            onChange={(event) =>
-              setFaturamentoUsuario(Number(event.target.value))
-            }
-          />
-        </InputWrapper>
-        <Btn type="submit" value="Calcular" />
-      </FormElement>
-      <div>
+      <ElementFlex>
+        <FormElement onSubmit={handleSubmit}>
+          <InputWrapper>
+            <LabelElement htmlFor="metragem">Metragem (em m2)</LabelElement>{" "}
+            <InputElement
+              type="text"
+              required
+              id="metragem"
+              value={metragemComercial}
+              onChange={(event) =>
+                setMetragemComercial(
+                  Number(event.target.value).toLocaleString()
+                )
+              }
+            />
+          </InputWrapper>
+          <InputWrapper>
+            <LabelElement htmlFor="faturamento">
+              Faturamento (aprox.)
+            </LabelElement>{" "}
+            <InputElement
+              type="text"
+              required
+              id="faturamento"
+              value={faturamentoUsuario}
+              onChange={(event) =>
+                setFaturamentoUsuario(Number(event.target.value))
+              }
+            />
+          </InputWrapper>
+          <Btn type="submit" value="Calcular" />
+        </FormElement>
         <div>
           <div>
-            <TitleShowDatas>Metragem média (em m2)</TitleShowDatas>
-            {metragemComercial !== "" ? (
-              <DataShowElement>{metragemComercial}</DataShowElement>
-            ) : undefined}
-          </div>
-          <div>
-            <TitleShowDatas>Faturamento médio (aprox.)</TitleShowDatas>
-            {faturamentoIdeal !== undefined ? (
-              <DataShowElement>{faturamentoIdeal}</DataShowElement>
-            ) : undefined}
+            <div>
+              <TitleShowDatas>Metragem média (em m2)</TitleShowDatas>
+              {metragemComercial !== "" ? (
+                <DataShowElement>{metragemComercial}</DataShowElement>
+              ) : undefined}
+            </div>
+            <div>
+              <TitleShowDatas>Faturamento médio (aprox.)</TitleShowDatas>
+              {faturamentoIdeal !== undefined ? (
+                <DataShowElement>{faturamentoIdeal}</DataShowElement>
+              ) : undefined}
+            </div>
           </div>
         </div>
-        <GraphicWrapper>
-          <TitleShowDatas>Potencial de Faturamento</TitleShowDatas>
-          {potencialFaturamento !== undefined ? (
-            <GraficoPotencial data={potencialFaturamento} />
-          ) : undefined}
-        </GraphicWrapper>
-      </div>
+      </ElementFlex>
+      <GraphicWrapper>
+        <TitleShowDatas>Potencial de Faturamento</TitleShowDatas>
+        {potencialFaturamento !== undefined ? (
+          <GraficoPotencial data={potencialFaturamento} />
+        ) : undefined}
+      </GraphicWrapper>
     </Container>
   );
 };
