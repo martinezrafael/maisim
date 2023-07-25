@@ -3,7 +3,7 @@ import GraficoPotencial from "./GraficoPotencial";
 import styled from "styled-components";
 
 const Container = styled.div`
-  maw-width: 90%;
+  max-width: 90%;
   margin: 0 auto;
   margin-bottom: 60px;
 `;
@@ -73,7 +73,7 @@ const Btn = styled.input`
   cursor: pointer;
 `;
 
-//Show Datas
+// Show Datas
 const TitleShowDatas = styled.h3`
   color: #3a1b48;
   font-size: 18px;
@@ -96,7 +96,7 @@ const CalcMetragem = () => {
 
   //valores calculados
   const [faturamentoIdeal, setFaturamentoIdeal] = useState(undefined);
-  const [potencialFaturamento, setpotencialFaturamento] = useState(undefined);
+  const [potencialFaturamento, setPotencialFaturamento] = useState(undefined);
 
   const calcValorMedioPorM2 = (metragem) => {
     let valorMedio = 0;
@@ -117,19 +117,14 @@ const CalcMetragem = () => {
   };
 
   const calcFaturamentoIdeal = () => {
-    localStorage.setItem(
-      "faturamento",
-      metragemComercial * calcValorMedioPorM2(metragemComercial)
-    );
-    return localStorage.getItem("faturamento");
+    return metragemComercial * calcValorMedioPorM2(metragemComercial);
   };
 
   const calcPotencialFaturamento = () => {
-    localStorage.setItem(
-      "potencial_faturamento",
-      Math.round((faturamentoUsuario / calcFaturamentoIdeal()) * 100)
+    return Math.min(
+      Math.round((faturamentoUsuario / calcFaturamentoIdeal()) * 100),
+      100
     );
-    return localStorage.getItem("potencial_faturamento");
   };
 
   const handleSubmit = (event) => {
@@ -142,7 +137,7 @@ const CalcMetragem = () => {
 
     setFaturamentoIdeal(faturamentoIdealBRL);
 
-    setpotencialFaturamento(calcPotencialFaturamento());
+    setPotencialFaturamento(calcPotencialFaturamento());
   };
 
   return (
@@ -184,7 +179,7 @@ const CalcMetragem = () => {
         <div>
           <div>
             <TitleShowDatas>Metragem média (em m2)</TitleShowDatas>
-            {metragemComercial !== undefined ? (
+            {metragemComercial !== "" ? (
               <DataShowElement>{metragemComercial}</DataShowElement>
             ) : undefined}
           </div>

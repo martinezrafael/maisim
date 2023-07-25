@@ -1,5 +1,10 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import styled from "styled-components";
+
+const GraphWrapper = styled.div`
+  max-width: 400px;
+`;
 
 const GraficoPotencial = ({ data }) => {
   const options = {
@@ -28,12 +33,12 @@ const GraficoPotencial = ({ data }) => {
         track: {
           background: "#e7e7e7",
           strokeWidth: "97%",
-          margin: 5, // Espaço entre a borda e a trilha
+          margin: 5,
         },
       },
     },
     fill: {
-      colors: ["#DA2053"],
+      colors: [data > 80 ? "#2DA555" : "#DA2053"],
     },
     stroke: {
       lineCap: "round",
@@ -42,9 +47,9 @@ const GraficoPotencial = ({ data }) => {
   };
 
   return (
-    <div>
+    <GraphWrapper>
       <Chart options={options} series={[data]} type="radialBar" height={350} />
-    </div>
+    </GraphWrapper>
   );
 };
 

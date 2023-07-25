@@ -75,12 +75,14 @@ const TableTitle = styled.h2`
   font-size: 60px;
   margin: 0;
   margin-bottom: 20px;
+  text-align: center;
 `;
 
 const TableHead = styled.th`
   font-size: 24px;
   font-weight: 700;
   padding: 12px 0;
+  width: 100%;
 `;
 
 const TableRow = styled.tr`
@@ -94,7 +96,6 @@ const TableData = styled.td`
   border: none;
   font-weight: 700;
   font-size: 18px;
-  width: 240px;
 `;
 
 const TableButton = styled.button`
@@ -145,15 +146,15 @@ const Top = ({ userCep }) => {
     const lowerCaseSetor = setor.toLowerCase();
 
     if (lowerCaseSetor === "generico") {
-      return "Genérico";
+      return "GENÉRICO";
     } else if (lowerCaseSetor === "nao_medicamento") {
-      return "Não Medicamento";
+      return "NÃO MEDICAMENTO";
     } else if (lowerCaseSetor === "otc_referencia") {
-      return "OTC Referência";
+      return "OTC REFERÊNCIA";
     } else if (lowerCaseSetor === "referencia") {
-      return "Referência";
+      return "REFERÊNCIA";
     } else if (lowerCaseSetor === "similar") {
-      return "Similar";
+      return "SIMILAR";
     } else {
       // Caso não corresponda a nenhum dos nomes específicos, retorna o próprio setor
       return setor;
