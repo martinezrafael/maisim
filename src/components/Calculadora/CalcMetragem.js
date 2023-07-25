@@ -103,8 +103,9 @@ const GraphicWrapper = styled.div`
 
 const ElementFlex = styled.div`
   display: flex;
-  align-items: top;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;

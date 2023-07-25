@@ -1,9 +1,10 @@
 import React from "react";
 import Chart from "react-apexcharts";
 import styled from "styled-components";
+import Button from "./Button";
 
 const GraphWrapper = styled.div`
-  max-width: 400px;
+  width: 100%;
 `;
 
 const GraficoPotencial = ({ data }) => {
@@ -49,6 +50,7 @@ const GraficoPotencial = ({ data }) => {
   return (
     <GraphWrapper>
       <Chart options={options} series={[data]} type="radialBar" height={350} />
+      {data < 80 && <Button />}
     </GraphWrapper>
   );
 };
