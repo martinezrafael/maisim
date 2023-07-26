@@ -37,8 +37,6 @@ const User = () => {
   const clientId = process.env.REACT_APP_CLIENT_ID;
   const endpoint = `${process.env.REACT_APP_API_URL}/admin/api/v2/users/${userID}`;
 
-  console.log(userData);
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {

@@ -10,9 +10,9 @@ const DownloadBtn = styled.button`
   cursor: pointer;
   font-size: 18px;
   font-weight: 700;
-  padding: 12px;
+  padding: 20px;
   text-transform: uppercase;
-  width: 300px;
+
   margin-top: 8px;
 `;
 
@@ -61,7 +61,9 @@ const FileDownload = () => {
 
   return (
     <div>
-      <DownloadBtn onClick={generateExcel}>Baixar</DownloadBtn>
+      <DownloadBtn onClick={generateExcel}>
+        Acessar Modelo de Estoque
+      </DownloadBtn>
     </div>
   );
 };

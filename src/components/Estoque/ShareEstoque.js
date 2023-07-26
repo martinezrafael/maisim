@@ -1,5 +1,32 @@
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
+import styled from "styled-components";
+
+const BoxTitle = styled.div`
+  padding: 12px;
+  border: 3px solid #6f3789;
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+`;
+
+const Title = styled.h2`
+  color: #3a1b48;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+`;
+
+const SubTitle = styled.p`
+  color: #3a1b48;
+  font-size: 24px;
+  margin: 0;
+`;
+
+const Wrapper = styled.div``;
 
 const ShareEstoque = ({ jsonData }) => {
   const [totalEstoque, setTotalEstoque] = useState(null);
@@ -129,6 +156,10 @@ const ShareEstoque = ({ jsonData }) => {
 
   return (
     <div>
+      <BoxTitle>
+        <Title>Comparativo 4</Title>
+        <SubTitle>Você vs. Mercado</SubTitle>
+      </BoxTitle>
       <div>
         {/* ... (código anterior) */}
         {jsonData.length > 0 && (

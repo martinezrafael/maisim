@@ -7,8 +7,18 @@ import styled from "styled-components";
 const CepInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 6px;
-  padding: 8px;
+  font-size: 16px;
+  display: block;
+  padding: 14px;
   margin-bottom: 20px;
+  margin-top: 10px;
+  width: 300px;
+`;
+
+const CepLabel = styled.label`
+  color: #3a1b48;
+
+  display: block;
 `;
 
 const BoxTitle = styled.div`
@@ -256,7 +266,6 @@ const Top = () => {
         <Title>Comparativo 2</Title>
         <SubTitle>Você vs. Mercado</SubTitle>
       </BoxTitle>
-
       <DescriptionWrapper>
         <div>
           <DescriptionIcon src={Sacola} alt="Sacola" />
@@ -270,7 +279,10 @@ const Top = () => {
         </div>
       </DescriptionWrapper>
       <div>
-        <label htmlFor="userCep">Cep</label>
+        <CepLabel htmlFor="userCep">
+          Insira seu CEP para ter acesso aos itens que mais vendem na sua
+          região!
+        </CepLabel>
         <CepInput
           type="text"
           placeholder="Digite o CEP para buscar informações"
