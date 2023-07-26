@@ -22,12 +22,8 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: 700;
   margin: 0;
-`;
-
-const SubTitle = styled.p`
-  color: #3a1b48;
-  font-size: 24px;
-  margin: 0;
+  text-align: center;
+  width: 70%;
 `;
 
 //Download
@@ -179,8 +175,9 @@ const FileUpload = ({ userCep }) => {
   return (
     <>
       <BoxTitle>
-        <Title>Comparativo 3</Title>
-        <SubTitle>Você vs. Mercado</SubTitle>
+        <Title>
+          Compare o seu estoque atual com o que mais vende na sua região
+        </Title>
       </BoxTitle>
       <div>
         <DownloadWrapper>

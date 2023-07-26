@@ -44,64 +44,67 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: 700;
   margin: 0;
+  margin-bottom: 10px;
 `;
 
 const SubTitle = styled.p`
   color: #3a1b48;
   font-size: 24px;
   margin: 0;
+  max-width: 60%;
+  text-align: center;
 `;
 
 //Descrição da seção
-const DescriptionWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 400px;
-  margin: auto;
-  padding: 40px 0;
+// const DescriptionWrapper = styled.div`
+//   display: flex;
+//   align-items: center;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   max-width: 400px;
+//   margin: auto;
+//   padding: 40px 0;
 
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 0;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     width: 100%;
+//     margin-bottom: 20px;
+//     padding: 0;
+//   }
+// `;
 
-const DescriptionIcon = styled.img`
-  width: 100px;
-  margin-right: 40px;
+// const DescriptionIcon = styled.img`
+//   width: 100px;
+//   margin-right: 40px;
 
-  @media screen and (max-width: 768px) {
-    margin-right: 10px;
-    width: 60px;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     margin-right: 10px;
+//     width: 60px;
+//   }
+// `;
 
-const DescriptionTitle = styled.h3`
-  color: #6f3789;
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0;
+// const DescriptionTitle = styled.h3`
+//   color: #6f3789;
+//   font-size: 32px;
+//   font-weight: 700;
+//   margin: 0;
 
-  @media screen and (max-width: 768px) {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 8px;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     font-size: 24px;
+//     text-align: center;
+//     margin-bottom: 8px;
+//   }
+// `;
 
-const DescriptionParagraph = styled.p`
-  color: #1f002a;
-  font-size: 18px;
-  margin: 0;
+// const DescriptionParagraph = styled.p`
+//   color: #1f002a;
+//   font-size: 18px;
+//   margin: 0;
 
-  @media screen and (max-width: 768px) {
-    text-align: center;
-  }
-`;
+//   @media screen and (max-width: 768px) {
+//     text-align: center;
+//   }
+// `;
 
 //Tabelas
 const TableWrapper = styled.div`
@@ -157,10 +160,7 @@ const TableRow = styled.tr`
   background: #1f002a;
   border-radius: 20px;
   text-align: center;
-
-  @media screen and (max-width: 500px) {
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 const TableData = styled.td`
@@ -169,15 +169,7 @@ const TableData = styled.td`
   border: none;
   font-weight: 700;
   font-size: 18px;
-
-  @media screen and (max-width: 500px) {
-    font-size: 14px;
-    font-weight: 400;
-    padding: 4px;
-    display: inline-block;
-    margin-bottom: 14px;
-    width: 100%;
-  }
+  width: 100%;
 `;
 
 const TableButton = styled.button`
@@ -195,6 +187,7 @@ const TableButton = styled.button`
   align-items: center;
   gap: 8px;
   padding: 10px;
+  width: 100%;
 
   @media screen and (max-width: 500px) {
     margin-bottom: 10px;
@@ -280,10 +273,13 @@ const Top = ({ onCepChange }) => {
   return (
     <>
       <BoxTitle>
-        <Title>Comparativo 2</Title>
-        <SubTitle>Você vs. Mercado</SubTitle>
+        <Title>Visão de Mercado</Title>
+        <SubTitle>
+          Entenda quais os itens que se destacam na sua região e aplique no seu
+          negócio
+        </SubTitle>
       </BoxTitle>
-      <DescriptionWrapper>
+      {/* <DescriptionWrapper>
         <div>
           <DescriptionIcon src={Sacola} alt="Sacola" />
         </div>
@@ -294,7 +290,7 @@ const Top = ({ onCepChange }) => {
             seu negócio
           </DescriptionParagraph>
         </div>
-      </DescriptionWrapper>
+      </DescriptionWrapper> */}
       <div>
         <CepLabel htmlFor="userCep">
           Insira seu CEP para ter acesso aos itens que mais vendem na sua
@@ -329,7 +325,24 @@ const Top = ({ onCepChange }) => {
                     return (
                       <React.Fragment key={index}>
                         <TableRow className={`item-${(index += 1)}`}>
-                          <TableData>{item.PRODUTO}</TableData>
+                          <TableData>
+                            {isShowButton && !isItemSelected ? (
+                              <TableButton onClick={() => handlePurchase(item)}>
+                                <img
+                                  src={Cadeado}
+                                  alt="Desbloquear comparação"
+                                />
+                                Desbloquear comparação
+                              </TableButton>
+                            ) : (
+                              <>
+                                <TableTitleMobile>
+                                  Laboratório:
+                                </TableTitleMobile>
+                                {item.PRODUTO}
+                              </>
+                            )}
+                          </TableData>
                           <TableData>
                             {isShowButton && !isItemSelected ? (
                               <TableButton onClick={() => handlePurchase(item)}>

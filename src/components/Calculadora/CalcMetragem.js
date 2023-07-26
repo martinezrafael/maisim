@@ -26,12 +26,8 @@ const Title = styled.h2`
   font-size: 2rem;
   font-weight: 700;
   margin: 0;
-`;
-
-const SubTitle = styled.p`
-  color: #3a1b48;
-  font-size: 1.5rem;
-  margin: 0;
+  text-align: center;
+  width: 70%;
 `;
 
 const FormElement = styled.form`
@@ -167,8 +163,7 @@ const CalcMetragem = () => {
   return (
     <Container>
       <BoxTitle>
-        <Title>Comparativo 1</Title>
-        <SubTitle>Você vs. Mercado</SubTitle>
+        <Title>Calculadora de Potencial de Faturamento da Farmácia</Title>
       </BoxTitle>
       <ElementFlex>
         <FormElement onSubmit={handleSubmit}>
