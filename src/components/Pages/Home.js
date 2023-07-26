@@ -7,20 +7,16 @@ import FileUpload from "../Estoque/FileUpload";
 const Home = () => {
   const [userCep, setUserCep] = useState("");
 
-  console.log(userCep);
-
   const handleCepChange = (newCep) => {
     setUserCep(newCep);
   };
 
   return (
     <div>
-      <div>
-        <Header />
-        <CalcMetragem />
-        <Top onCepChange={handleCepChange} />
-        <FileUpload userCep={Number(userCep)} />
-      </div>
+      <Header />
+      <CalcMetragem />
+      <Top onCepChange={handleCepChange} />
+      <FileUpload userCep={Number(userCep)} />
     </div>
   );
 };

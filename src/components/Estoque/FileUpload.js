@@ -55,6 +55,8 @@ const DownloadDescription = styled.p`
 //Upload
 const UploadWrapper = styled.div`
   padding: 20px 0;
+  background: blue;
+  text-align: center;
 `;
 
 const UploadDescription = styled.p`

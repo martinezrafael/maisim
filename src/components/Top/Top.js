@@ -4,6 +4,11 @@ import Cadeado from "../../images/icons/cadeado.svg";
 import Sacola from "../../images/icons/sacola.svg";
 import styled from "styled-components";
 
+const Container = styled.div`
+  background: blue;
+  width: 100%;
+`;
+
 const CepInput = styled.input`
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -13,11 +18,14 @@ const CepInput = styled.input`
   margin-bottom: 20px;
   margin-top: 10px;
   width: 300px;
+
+  @media screen and (max-width: 500px) {
+    width: 80%;
+  }
 `;
 
 const CepLabel = styled.label`
   color: #3a1b48;
-
   display: block;
 `;
 
@@ -166,8 +174,8 @@ const TableData = styled.td`
   @media screen and (max-width: 500px) {
     font-size: 14px;
     font-weight: 400;
-    padding: 0;
-    display: block;
+    padding: 4px;
+    display: inline-block;
     margin-bottom: 14px;
     width: 100%;
   }
@@ -191,7 +199,7 @@ const TableButton = styled.button`
 
   @media screen and (max-width: 500px) {
     margin-bottom: 10px;
-    width: 100%;
+    width: 90%;
   }
 `;
 
@@ -301,7 +309,7 @@ const Top = ({ onCepChange }) => {
           id="useCep"
         />
       </div>
-      <div>
+      <Container>
         {Object.keys(groupedData).map((setor) => {
           const { setorTotalQuantity, items } = groupedData[setor];
           return (
@@ -366,7 +374,7 @@ const Top = ({ onCepChange }) => {
             </TableWrapper>
           );
         })}
-      </div>
+      </Container>
     </>
   );
 };
