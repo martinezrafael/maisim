@@ -37,6 +37,9 @@ const DownloadWrapper = styled.div`
     #fc46c2 0%,
     #8d4aab 100%
   );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border-radius: 20px;
   color: #fff;
   padding: 20px;
