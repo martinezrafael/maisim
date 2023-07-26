@@ -84,7 +84,6 @@ const Btn = styled.button`
 `;
 
 const FileUpload = ({ userCep }) => {
-  //estado que armazena o json gerado com os dados da planilha de estoque
   const [jsonData, setJsonData] = useState(null);
   const [showUnlockButtons, setShowUnlockButtons] = useState(false);
 
@@ -99,28 +98,32 @@ const FileUpload = ({ userCep }) => {
       const sheet = workbook.Sheets[sheetName];
       const json = XLSX.utils.sheet_to_json(sheet, { defval: "" });
 
-      // Chamar a API para obter o valor correto do campo "SETOR_NEC_ABERTO"
-      const dataFromApi = await dataIqvia(userCep);
+      try {
+        const dataFromApi = await dataIqvia(userCep);
 
-      const jsonDataWithSetor = json.map((item) => {
-        const encontrado = dataFromApi.find(
-          (apiData) => apiData.EAN.toString() === item.EAN.toString()
-        );
+        const jsonDataWithSetor = json.map((item) => {
+          const encontrado = dataFromApi.find(
+            (apiData) => apiData.EAN.toString() === item.EAN.toString()
+          );
 
-        const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
-        const produto = encontrado ? encontrado.PRODUTO : "";
-        const unidades = encontrado ? encontrado.UNIDADES : 0;
-        const laboratorio = encontrado ? encontrado.LABORATORIO : "";
+          const setor = encontrado ? encontrado.SETOR_NEC_ABERTO : "";
+          const produto = encontrado ? encontrado.PRODUTO : "";
+          const unidades = encontrado ? encontrado.UNIDADES : 0;
+          const laboratorio = encontrado ? encontrado.LABORATORIO : "";
 
-        return {
-          ...item,
-          SETOR_NEC_ABERTO: setor,
-          PRODUTO: produto,
-          UNIDADES: unidades,
-          LABORATORIO: laboratorio,
-        };
-      });
-      setJsonData(jsonDataWithSetor);
+          return {
+            ...item,
+            SETOR_NEC_ABERTO: setor,
+            PRODUTO: produto,
+            UNIDADES: unidades,
+            LABORATORIO: laboratorio,
+          };
+        });
+
+        setJsonData(jsonDataWithSetor);
+      } catch (error) {
+        console.error("Erro ao obter dados de brick:", error);
+      }
     };
 
     reader.readAsArrayBuffer(file);
@@ -130,7 +133,6 @@ const FileUpload = ({ userCep }) => {
     try {
       const dataFromApi = await dataIqvia(userCep);
 
-      // Converter os nomes e laboratórios da planilha para letras maiúsculas e sem espaços em branco extras
       const jsonDataUpperCase = jsonData.map((item) => ({
         ...item,
         PRODUTO: item.PRODUTO ? item.PRODUTO.toUpperCase().trim() : "",
@@ -139,14 +141,12 @@ const FileUpload = ({ userCep }) => {
           : "",
       }));
 
-      // Converter os nomes e laboratórios da API para letras maiúsculas e sem espaços em branco extras
       const dataFromApiUpperCase = dataFromApi.map((apiData) => ({
         ...apiData,
         PRODUTO: apiData.PRODUTO.toUpperCase().trim(),
         LABORATORIO: apiData.LABORATORIO.toUpperCase().trim(),
       }));
 
-      // Compara os dados da planilha com os dados da API (case-insensitive e em letras maiúsculas)
       const updatedJsonData = jsonDataUpperCase.map((item) => {
         const encontrado = dataFromApiUpperCase.find(
           (apiData) =>
@@ -165,6 +165,7 @@ const FileUpload = ({ userCep }) => {
           SETOR_NEC_ABERTO: setor,
         };
       });
+
       setShowUnlockButtons(true);
       setJsonData(updatedJsonData);
     } catch (error) {

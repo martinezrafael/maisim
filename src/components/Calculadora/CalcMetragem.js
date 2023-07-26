@@ -103,7 +103,7 @@ const GraphicWrapper = styled.div`
 
 const ElementFlex = styled.div`
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: space-between;
   margin-bottom: 40px;
 

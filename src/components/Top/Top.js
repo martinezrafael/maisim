@@ -195,10 +195,20 @@ const TableButton = styled.button`
   }
 `;
 
-const Top = () => {
+const Top = ({ onCepChange }) => {
   const [data, setData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [userCep, setUserCep] = useState("");
+
+  const handleCepChange = (event) => {
+    const newCep = event.target.value;
+    setUserCep(newCep);
+    onCepChange(newCep);
+  };
+
+  const handleCepSubmit = () => {
+    onCepChange(userCep);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -287,7 +297,7 @@ const Top = () => {
           type="text"
           placeholder="Digite o CEP para buscar informações"
           value={userCep}
-          onChange={(e) => setUserCep(e.target.value)}
+          onChange={handleCepChange}
           id="useCep"
         />
       </div>

@@ -3,30 +3,37 @@ import Chart from "react-apexcharts";
 import styled from "styled-components";
 
 const BoxTitle = styled.div`
-  padding: 12px;
-  border: 3px solid #6f3789;
-  border-radius: 28px;
+  padding: 40px;
   display: flex;
+
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 20px auto;
+  margin: 40px auto;
 `;
 
 const Title = styled.h2`
-  color: #3a1b48;
+  color: #fff;
   font-size: 32px;
   font-weight: 700;
   margin: 0;
 `;
 
 const SubTitle = styled.p`
-  color: #3a1b48;
+  color: #fff;
   font-size: 24px;
   margin: 0;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  background: radial-gradient(
+    106.63% 107.48% at 0% 0%,
+    #fc46c2 0%,
+    #8d4aab 100%
+  );
+  border-radius: 20px;
+  padding: 0px 60px;
+`;
 
 const ShareEstoque = ({ jsonData }) => {
   const [totalEstoque, setTotalEstoque] = useState(null);
@@ -155,7 +162,7 @@ const ShareEstoque = ({ jsonData }) => {
   }, [setorPercentages]);
 
   return (
-    <div>
+    <Wrapper>
       <BoxTitle>
         <Title>Comparativo 4</Title>
         <SubTitle>Você vs. Mercado</SubTitle>
@@ -182,6 +189,14 @@ const ShareEstoque = ({ jsonData }) => {
                 markers: {
                   size: 5,
                 },
+                colors: ["#C05757", "#414141"], // Cores para as séries "Sua Participação" e "Bric Ideal"
+                dataLabels: {
+                  style: {
+                    colors: ["#FFFFFF", "#FFFFFF"], // Cores dos rótulos de "Sua Participação" e "Bric Ideal"
+                    fontSize: "16px",
+                  },
+                },
+                strokeColors: "#FFFFFF", // Cor das linhas
               }}
               series={[
                 {
@@ -258,15 +273,15 @@ const ShareEstoque = ({ jsonData }) => {
           cenarios.map((cen, index) => (
             <div key={index}>
               <div>Categoria: {cen.category}</div>
-              <div>Porcentagem: {cen.percentage}%</div>
+              {/* <div>Porcentagem: {cen.percentage}%</div>
               <div>Meta: {cen.meta}%</div>
               <div>Mínimo: {cen.min}%</div>
-              <div>Máximo: {cen.max}%</div>
+              <div>Máximo: {cen.max}%</div> */}
               <div>Cenário: {cen.cenario}</div>
             </div>
           ))}
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
