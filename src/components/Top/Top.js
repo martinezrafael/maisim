@@ -5,7 +5,6 @@ import Sacola from "../../images/icons/sacola.svg";
 import styled from "styled-components";
 
 const Container = styled.div`
-  background: blue;
   width: 100%;
 `;
 
