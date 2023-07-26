@@ -32,7 +32,18 @@ const Wrapper = styled.div`
     #8d4aab 100%
   );
   border-radius: 20px;
-  padding: 0px 60px;
+  padding: 20px 60px;
+  margin-top: 40px;
+`;
+
+//Cenários
+const Cenario = styled.div`
+  background: #1f002a;
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 12px;
+  margin-top: 12px;
 `;
 
 const ShareEstoque = ({ jsonData }) => {
@@ -236,6 +247,9 @@ const ShareEstoque = ({ jsonData }) => {
                   formatter: function (val) {
                     return `${val}%`;
                   },
+                  style: {
+                    colors: ["#fff"], // Define a cor branca para os rótulos dos dados
+                  },
                 },
               },
             },
@@ -243,7 +257,7 @@ const ShareEstoque = ({ jsonData }) => {
               enabled: true,
               style: {
                 fontSize: "14px",
-                colors: ["#000"],
+                colors: ["#fff"], // Define a cor branca para os rótulos do gráfico
               },
             },
             xaxis: {
@@ -257,6 +271,12 @@ const ShareEstoque = ({ jsonData }) => {
                 show: true,
               },
             },
+            legend: {
+              labels: {
+                colors: "#fff",
+              },
+            },
+            colors: ["#1f002a"],
           }}
           series={[
             {
@@ -269,16 +289,19 @@ const ShareEstoque = ({ jsonData }) => {
         />
       </div>
       <div>
+        <Title>Cenários</Title>
         {isCenariosReady &&
           cenarios.map((cen, index) => (
-            <div key={index}>
-              <div>Categoria: {cen.category}</div>
+            <Cenario key={index}>
+              <p>
+                <strong>Categoria:</strong> {cen.category}
+              </p>
               {/* <div>Porcentagem: {cen.percentage}%</div>
               <div>Meta: {cen.meta}%</div>
               <div>Mínimo: {cen.min}%</div>
               <div>Máximo: {cen.max}%</div> */}
-              <div>Cenário: {cen.cenario}</div>
-            </div>
+              <p>Cenário: {cen.cenario}</p>
+            </Cenario>
           ))}
       </div>
     </Wrapper>
