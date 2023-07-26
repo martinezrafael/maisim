@@ -4,6 +4,13 @@ import Cadeado from "../../images/icons/cadeado.svg";
 import Sacola from "../../images/icons/sacola.svg";
 import styled from "styled-components";
 
+const CepInput = styled.input`
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  margin-bottom: 20px;
+`;
+
 const BoxTitle = styled.div`
   padding: 12px;
   border: 3px solid #6f3789;
@@ -132,6 +139,7 @@ const TableHead = styled.th`
 const TableRow = styled.tr`
   background: #1f002a;
   border-radius: 20px;
+  text-align: center;
 
   @media screen and (max-width: 500px) {
     width: 100%;
@@ -139,7 +147,7 @@ const TableRow = styled.tr`
 `;
 
 const TableData = styled.td`
-  padding: 14px;
+  padding: 20px;
   border-radius: 10px;
   border: none;
   font-weight: 700;
@@ -177,9 +185,10 @@ const TableButton = styled.button`
   }
 `;
 
-const Top = ({ userCep }) => {
+const Top = () => {
   const [data, setData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [userCep, setUserCep] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -190,6 +199,10 @@ const Top = ({ userCep }) => {
         console.error("Erro ao obter dados:", error);
       }
     };
+
+    if (userCep.trim() !== "") {
+      fetchData();
+    }
 
     fetchData();
   }, [userCep]);
@@ -237,14 +250,13 @@ const Top = ({ userCep }) => {
     return acc;
   }, {});
 
-  console.log(groupedData);
-
   return (
     <>
       <BoxTitle>
         <Title>Comparativo 2</Title>
         <SubTitle>Você vs. Mercado</SubTitle>
       </BoxTitle>
+
       <DescriptionWrapper>
         <div>
           <DescriptionIcon src={Sacola} alt="Sacola" />
@@ -257,6 +269,16 @@ const Top = ({ userCep }) => {
           </DescriptionParagraph>
         </div>
       </DescriptionWrapper>
+      <div>
+        <label htmlFor="userCep">Cep</label>
+        <CepInput
+          type="text"
+          placeholder="Digite o CEP para buscar informações"
+          value={userCep}
+          onChange={(e) => setUserCep(e.target.value)}
+          id="useCep"
+        />
+      </div>
       <div>
         {Object.keys(groupedData).map((setor) => {
           const { setorTotalQuantity, items } = groupedData[setor];

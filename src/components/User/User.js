@@ -61,8 +61,8 @@ const User = () => {
     <div>
       {userData !== null ? (
         <UserInfos>
-          <UserName>{userData.username}</UserName>
-          <span>{userData.billing_info.bf_postalcode}</span>
+          {/* <UserName>{userData.username}</UserName>
+          <span>{userData.billing_info.bf_postalcode}</span> */}
           <CalcMetragem />
           <Top userCep={userData.billing_info.bf_postalcode.replace("-", "")} />
           <FileUpload
