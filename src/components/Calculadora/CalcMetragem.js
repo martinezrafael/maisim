@@ -76,6 +76,7 @@ const Btn = styled.input`
 const SpanElement = styled.span`
   @media screen and (max-width: 500px) {
     text-align: center;
+    display: inline-block;
   }
 `;
 
