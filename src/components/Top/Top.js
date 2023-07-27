@@ -65,13 +65,21 @@ const Wrapper = styled.div`
   color: #fff;
   margin-bottom: 20px;
   padding: 40px;
+
+  @media screen and (max-width: 500px) {
+    padding: 40px 10px;
+  }
 `;
 
 const TableTitle = styled.h2`
-  font-size: 60px;
+  font-size: 40px;
   margin: 0;
   margin-bottom: 20px;
   text-align: center;
+
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+  }
 `;
 
 const ColumnWrapper = styled.div`
@@ -81,6 +89,9 @@ const ColumnWrapper = styled.div`
 
 const ColumTitle = styled.h3`
   text-align: center;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const RowsWrapper = styled.div`
@@ -92,6 +103,12 @@ const RowsWrapper = styled.div`
   padding: 24px 12px;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 24px 12px;
+  }
 `;
 
 const Row = styled.div`
@@ -100,6 +117,10 @@ const Row = styled.div`
   font-weight: 900;
   justify-content: center;
   text-align: center;
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const RowBtn = styled.button`

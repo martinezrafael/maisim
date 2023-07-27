@@ -4,10 +4,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   margin-bottom: 60px;
-
-  @media screen and (max-width: 768px) {
-    margin-bottom: 40px;
-  }
 `;
 
 const BoxTitle = styled.div`
@@ -23,19 +19,20 @@ const BoxTitle = styled.div`
 
 const Title = styled.h2`
   color: #3a1b48;
-  font-size: 2rem;
+  font-size: 32px;
   font-weight: 700;
   margin: 0;
   text-align: center;
   width: 70%;
+
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+  }
 `;
 
 const FormElement = styled.form`
-  padding: 20px 0px;
-  @media screen and (max-width: 500px) {
-    width: 100%;
-    padding: 0;
-  }
+  background: blue;
+  padding: 20px;
 `;
 
 const LabelElement = styled.label`
@@ -48,12 +45,12 @@ const InputWrapper = styled.div`
 `;
 
 const InputElement = styled.input`
-  width: 100%;
+  width: 100%;s
   display: block;
   padding: 18px;
   border-radius: 12px;
   font-size: 16px;
-  background: #fff;
+  background: blue;
   border: none;
 
   @media screen and (max-width: 500px) {
@@ -213,7 +210,7 @@ const CalcMetragem = () => {
               ) : (
                 <>
                   <span style={{ maxWidth: "400px" }}>
-                    Preencha o formulário ao lado para obter os resultados.
+                    Preencha o formulário para obter os resultados.
                   </span>
                 </>
               )}
