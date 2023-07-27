@@ -31,9 +31,7 @@ const Title = styled.h2`
 `;
 
 const FormElement = styled.form`
-  max-width: 600px;
   padding: 20px 0px;
-
   @media screen and (max-width: 500px) {
     width: 100%;
     padding: 0;
@@ -93,15 +91,14 @@ const DataShowElement = styled.span`
 `;
 
 const GraphicWrapper = styled.div`
-  width: 100%;
   text-align: center;
 `;
 
 const ElementFlex = styled.div`
   display: flex;
   align-items: top;
-  justify-content: space-between;
   margin-bottom: 40px;
+  justify-content: space-between;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
@@ -197,29 +194,41 @@ const CalcMetragem = () => {
           </InputWrapper>
           <Btn type="submit" value="Calcular" />
         </FormElement>
+        <GraphicWrapper>
+          {potencialFaturamento !== undefined ? (
+            <>
+              <TitleShowDatas>Potencial de Faturamento</TitleShowDatas>
+              <GraficoPotencial data={potencialFaturamento} />
+            </>
+          ) : undefined}
+        </GraphicWrapper>
         <div>
           <div>
             <div>
-              <TitleShowDatas>Metragem média (em m2)</TitleShowDatas>
               {metragemComercial !== "" ? (
-                <DataShowElement>{metragemComercial}</DataShowElement>
-              ) : undefined}
+                <>
+                  <TitleShowDatas>Metragem média (em m2)</TitleShowDatas>
+                  <DataShowElement>{metragemComercial}</DataShowElement>
+                </>
+              ) : (
+                <>
+                  <span style={{ maxWidth: "400px" }}>
+                    Preencha o formulário ao lado para obter os resultados.
+                  </span>
+                </>
+              )}
             </div>
             <div>
-              <TitleShowDatas>Faturamento médio (aprox.)</TitleShowDatas>
               {faturamentoIdeal !== undefined ? (
-                <DataShowElement>{faturamentoIdeal}</DataShowElement>
+                <>
+                  <TitleShowDatas>Faturamento médio (aprox.)</TitleShowDatas>
+                  <DataShowElement>{faturamentoIdeal}</DataShowElement>
+                </>
               ) : undefined}
             </div>
           </div>
         </div>
       </ElementFlex>
-      <GraphicWrapper>
-        <TitleShowDatas>Potencial de Faturamento</TitleShowDatas>
-        {potencialFaturamento !== undefined ? (
-          <GraficoPotencial data={potencialFaturamento} />
-        ) : undefined}
-      </GraphicWrapper>
     </Container>
   );
 };
