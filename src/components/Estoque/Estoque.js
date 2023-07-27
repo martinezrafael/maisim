@@ -2,49 +2,86 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Cadeado from "../../images/icons/cadeado.svg";
 
-const TableWrapper = styled.div`
-  border: 3px solid #6f3789;
+const Wrapper = styled.div`
+  border: 3px solid #fc46c2;
   border-radius: 20px;
-  padding: 60px;
+  margin-bottom: 20px;
+  padding: 40px;
+
+  @media screen and (max-width: 500px) {
+    padding: 40px 10px;
+  }
 `;
 
-const TitleSetor = styled.h2`
+const TableTitle = styled.h2`
   color: #3a1b48;
-  font-size 60px;
+  font-size: 32px;
+  margin: 0;
+  margin-bottom: 20px;
+  text-align: center;
+
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+  }
 `;
 
-const TitleHead = styled.th`
+const ColumnWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+`;
+
+const ColumTitle = styled.h3`
   color: #3a1b48;
-  font-size: 24px;
-  padding: 12px 0;
+  text-align: center;
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
-const RowElement = styled.tr`
+const RowsWrapper = styled.div`
+  align-items: center;
   background: radial-gradient(
     106.63% 107.48% at 0% 0%,
     #fc46c2 0%,
     #8d4aab 100%
   );
   color: #fff;
-  text-align: center;
+  border-radius: 22px;
+  display: grid;
+  margin-bottom: 24px;
+  padding: 24px 12px;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 24px 12px;
+  }
 `;
 
-const DataElement = styled.td`
-  font-weight: 900;
-  border-radius: 20px;
-  padding: 14px;
-`;
-
-const BtnDesbloquear = styled.button`
-  background: #1f002a;
-  color: #fff;
-  border-radius: 20px;
-  font-weight: 900;
-  font-size: 16px;
-  gap: 8px;
+const Row = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px;
+  font-weight: 900;
+  justify-content: center;
+  text-align: center;
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+  }
+`;
+
+const RowBtn = styled.button`
+  background: #1f002a;
+  color: #fff;
+  border-radius: 22px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 24px;
+  cursor: pointer;
 `;
 
 const Estoque = ({ jsonData, showUnlockButtons }) => {
@@ -104,63 +141,64 @@ const Estoque = ({ jsonData, showUnlockButtons }) => {
   const separatedData = separateDataBySetor();
 
   return (
-    <div>
-      <TableWrapper>
-        {Object.entries(separatedData).map(([setor, data]) => (
-          <div key={setor}>
-            <TitleSetor>{formatSetor(setor)}</TitleSetor>
-            <table>
-              <thead>
-                <tr>
-                  <TitleHead>Produto</TitleHead>
-                  <TitleHead>Laboratório</TitleHead>
-                  <TitleHead>Parte do Mix</TitleHead>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => (
-                  <RowElement key={index}>
-                    <DataElement>{item.PRODUTO}</DataElement>
-                    <DataElement>
-                      {showUnlockButtons &&
-                      index < 3 &&
-                      !unlockedItems.includes(item) ? (
-                        <BtnDesbloquear
-                          onClick={() =>
-                            setUnlockedItems([...unlockedItems, item])
-                          }
-                        >
-                          <img src={Cadeado} alt="Desbloquear comparação" />
-                          Desbloquear comparação
-                        </BtnDesbloquear>
-                      ) : (
-                        item.LABORATORIO
-                      )}
-                    </DataElement>
-                    <DataElement>
-                      {showUnlockButtons &&
-                      index < 3 &&
-                      !unlockedItems.includes(item) ? (
-                        <BtnDesbloquear
-                          onClick={() =>
-                            setUnlockedItems([...unlockedItems, item])
-                          }
-                        >
-                          <img src={Cadeado} alt="Desbloquear comparação" />
-                          Desbloquear comparação
-                        </BtnDesbloquear>
-                      ) : (
-                        item["PARTE DO MIX"]
-                      )}
-                    </DataElement>
-                  </RowElement>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        ))}
-      </TableWrapper>
-    </div>
+    <Wrapper>
+      {Object.entries(separatedData).map(([setor, data]) => (
+        <div key={setor}>
+          <TableTitle>{formatSetor(setor)}</TableTitle>
+          <ColumnWrapper>
+            <ColumTitle>Produto</ColumTitle>
+            <ColumTitle>Laboratório</ColumTitle>
+            <ColumTitle>Parte do Mix</ColumTitle>
+          </ColumnWrapper>
+          {data.map((item, index) => (
+            <RowsWrapper key={index}>
+              <Row>
+                {showUnlockButtons &&
+                index < 3 &&
+                !unlockedItems.includes(item) ? (
+                  <RowBtn
+                    onClick={() => setUnlockedItems([...unlockedItems, item])}
+                  >
+                    <img src={Cadeado} alt="Desbloquear comparação" />
+                    Desbloquear comparação
+                  </RowBtn>
+                ) : (
+                  item.PRODUTO
+                )}
+              </Row>
+              <Row>
+                {showUnlockButtons &&
+                index < 3 &&
+                !unlockedItems.includes(item) ? (
+                  <RowBtn
+                    onClick={() => setUnlockedItems([...unlockedItems, item])}
+                  >
+                    <img src={Cadeado} alt="Desbloquear comparação" />
+                    Desbloquear comparação
+                  </RowBtn>
+                ) : (
+                  item.LABORATORIO
+                )}
+              </Row>
+              <Row>
+                {showUnlockButtons &&
+                index < 3 &&
+                !unlockedItems.includes(item) ? (
+                  <RowBtn
+                    onClick={() => setUnlockedItems([...unlockedItems, item])}
+                  >
+                    <img src={Cadeado} alt="Desbloquear comparação" />
+                    Desbloquear comparação
+                  </RowBtn>
+                ) : (
+                  item["PARTE DO MIX"]
+                )}
+              </Row>
+            </RowsWrapper>
+          ))}
+        </div>
+      ))}
+    </Wrapper>
   );
 };
 

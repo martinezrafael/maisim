@@ -72,7 +72,7 @@ const Wrapper = styled.div`
 `;
 
 const TableTitle = styled.h2`
-  font-size: 40px;
+  font-size: 32px;
   margin: 0;
   margin-bottom: 20px;
   text-align: center;
