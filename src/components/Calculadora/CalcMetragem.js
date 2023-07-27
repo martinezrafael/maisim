@@ -31,7 +31,6 @@ const Title = styled.h2`
 `;
 
 const FormElement = styled.form`
-  background: blue;
   padding: 20px;
 `;
 
@@ -50,7 +49,7 @@ const InputElement = styled.input`
   padding: 18px;
   border-radius: 12px;
   font-size: 16px;
-  background: blue;
+
   border: none;
 
   @media screen and (max-width: 500px) {
