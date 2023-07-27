@@ -73,6 +73,12 @@ const Btn = styled.input`
   cursor: pointer;
 `;
 
+const SpanElement = styled.span`
+  @media screen and (max-width: 500px) {
+    text-align: center;
+  }
+`;
+
 // Show Datas
 const TitleShowDatas = styled.h3`
   color: #3a1b48;
@@ -206,11 +212,9 @@ const CalcMetragem = () => {
                   <DataShowElement>{metragemComercial}</DataShowElement>
                 </>
               ) : (
-                <>
-                  <span style={{ maxWidth: "400px" }}>
-                    Preencha o formulário para obter os resultados.
-                  </span>
-                </>
+                <SpanElement>
+                  Preencha o formulário para obter os resultados.
+                </SpanElement>
               )}
             </div>
             <div>

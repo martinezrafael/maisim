@@ -139,34 +139,21 @@ const RowBtn = styled.button`
   cursor: pointer;
 `;
 
-const Top = ({ onCepChange }) => {
+const Top = ({ onCepChange, userCep }) => {
   const [data, setData] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [userCep, setUserCep] = useState("");
-
-  const handleCepChange = (event) => {
-    const newCep = event.target.value;
-    setUserCep(newCep);
-    onCepChange(newCep);
-  };
-
-  const handleCepSubmit = () => {
-    onCepChange(userCep);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await dataIqvia(userCep);
-        setData(data);
+        if (userCep) {
+          const data = await dataIqvia(userCep);
+          setData(data);
+        }
       } catch (error) {
         console.error("Erro ao obter dados:", error);
       }
     };
-
-    if (userCep.trim() !== "") {
-      fetchData();
-    }
 
     fetchData();
   }, [userCep]);
@@ -223,19 +210,6 @@ const Top = ({ onCepChange }) => {
           negócio
         </SubTitle>
       </BoxTitle>
-      <div>
-        <CepLabel htmlFor="userCep">
-          Insira seu CEP para ter acesso aos itens que mais vendem na sua
-          região!
-        </CepLabel>
-        <CepInput
-          type="text"
-          placeholder="Digite o CEP para buscar informações"
-          value={userCep}
-          onChange={handleCepChange}
-          id="useCep"
-        />
-      </div>
       <Container>
         {Object.keys(groupedData).map((setor) => {
           const { items } = groupedData[setor];
