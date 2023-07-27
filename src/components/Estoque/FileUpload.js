@@ -26,60 +26,51 @@ const Title = styled.h2`
   width: 70%;
 `;
 
-//Download
-const DownloadWrapper = styled.div`
-  background: radial-gradient(
-    106.63% 107.48% at 0% 0%,
-    #fc46c2 0%,
-    #8d4aab 100%
-  );
+const BtnComparar = styled.button`
+  background: green;
+  border-radius: 22px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding: 20px 40px;
+  width: 100%;
+`;
+
+const FlexElement = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+`;
+
+const Box = styled.div`
   display: flex;
+  color: #fff;
+  border-radius: 22px;
   flex-direction: column;
   align-items: center;
-  border-radius: 20px;
-  color: #fff;
+  justify-content: center;
   padding: 20px;
-  margin-bottom: 40px;
-`;
-
-const DownloadDescription = styled.p`
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-`;
-
-//Upload
-const UploadWrapper = styled.div`
-  padding: 20px 0;
-`;
-
-const UploadDescription = styled.p`
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-  margin-bottom: 8px;
-`;
-
-const InputFile = styled.input`
-  padding: 12px;
-  background: #ddd;
-  border: none;
-  box-sizing: border-box;
-  border-radius: 12px 0px 0px 12px;
-`;
-
-const Btn = styled.button`
+  text-align: center;
   background: radial-gradient(
     106.63% 107.48% at 0% 0%,
     #fc46c2 0%,
     #8d4aab 100%
   );
-  border-color: #8d4aab;
-  color: #fff;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 12px;
-  border-radius: 0px 12px 12px 0px;
+  height: 220px;
+`;
+
+const BoxParagraph = styled.p`
+  font-size: 18px;
+  font-weight: 700;
 `;
 
 const FileUpload = ({ userCep }) => {
@@ -180,25 +171,23 @@ const FileUpload = ({ userCep }) => {
         </Title>
       </BoxTitle>
       <div>
-        <DownloadWrapper>
-          <DownloadDescription>
-            Baixe a planilha e preencha com os dados do seu estoque: EAN e
-            QUANTIDADE
-          </DownloadDescription>
-          <FileDownload />
-        </DownloadWrapper>
-        <UploadWrapper>
-          <UploadDescription>
-            Faça upload da planilha que você preencheu e clique em comparar para
-            fazer uma análise do seu estoque.
-          </UploadDescription>
-          <InputFile
-            type="file"
-            accept=".xls, .xlsx"
-            onChange={handleFileChange}
-          />
-          <Btn onClick={handleUpload}>Comparar</Btn>
-        </UploadWrapper>
+        <FlexElement>
+          <Box>
+            <BoxParagraph>
+              Baixe a planilha e preencha com os dados do seu estoque
+            </BoxParagraph>
+            <FileDownload />
+          </Box>
+          <Box>
+            <BoxParagraph>Adicione a planilha preenchida aqui.</BoxParagraph>
+            <input
+              type="file"
+              accept=".xls, .xlsx"
+              onChange={handleFileChange}
+            />
+          </Box>
+        </FlexElement>
+        <BtnComparar onClick={handleUpload}>Clique para Comparar</BtnComparar>
         {jsonData && (
           <>
             <Estoque

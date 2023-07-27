@@ -1,19 +1,19 @@
 import React from "react";
 import * as XLSX from "xlsx";
 import styled from "styled-components";
+import DownloadIcon from "../../images/icons/download.svg";
 
-const DownloadBtn = styled.button`
-  background: #2da555;
-  border-radius: 12px;
+const BtnDownload = styled.button`
+  background: #3a1b48;
   border: none;
+  border-radius: 22px;
   color: #fff;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 700;
-  padding: 20px;
-  text-transform: uppercase;
-
-  margin-top: 8px;
+  font-size: 16px;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 
 const FileDownload = () => {
@@ -61,9 +61,10 @@ const FileDownload = () => {
 
   return (
     <div>
-      <DownloadBtn onClick={generateExcel}>
+      <BtnDownload onClick={generateExcel}>
+        <img src={DownloadIcon} />
         Acessar Modelo de Estoque
-      </DownloadBtn>
+      </BtnDownload>
     </div>
   );
 };
