@@ -39,8 +39,7 @@ const Home = () => {
 
   const handleCepChange = (event) => {
     const newCep = event.target.value;
-    const parsedCep = parseInt(newCep, 10);
-    setUserCep(parsedCep);
+    setUserCep(newCep);
   };
 
   return (
