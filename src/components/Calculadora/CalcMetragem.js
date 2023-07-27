@@ -44,12 +44,11 @@ const InputWrapper = styled.div`
 `;
 
 const InputElement = styled.input`
-  width: 100%;s
+  width: 100%;
   display: block;
   padding: 18px;
   border-radius: 12px;
   font-size: 16px;
-
   border: none;
 
   @media screen and (max-width: 500px) {
