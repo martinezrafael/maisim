@@ -4,7 +4,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
-  margin-bottom: 60px;
 `;
 
 const BoxTitle = styled.div`
@@ -175,9 +174,11 @@ const CalcMetragem = () => {
   return (
     <Container>
       <BoxTitle>
-        <Title>Calculadora de Potencial de Faturamento da Farmácia</Title>
+        <Title>Potencial de Faturamento da Farmácia</Title>
       </BoxTitle>
+      <SpanElement>Preencha o formulário para obter os resultados.</SpanElement>
       <ElementFlex>
+        {" "}
         <FormElement onSubmit={handleSubmit}>
           <InputWrapper>
             <LabelElement htmlFor="metragem">Metragem (em m2)</LabelElement>{" "}
@@ -226,9 +227,7 @@ const CalcMetragem = () => {
                   <DataShowElement>{metragemComercial}</DataShowElement>
                 </>
               ) : (
-                <SpanElement>
-                  Preencha o formulário para obter os resultados.
-                </SpanElement>
+                ""
               )}
             </div>
             <div>

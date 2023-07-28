@@ -2,21 +2,41 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import styled from "styled-components";
 
-const BoxTitle = styled.div`
-  padding: 40px;
-  display: flex;
+const GraficoWrapper = styled.div`
+  margin-bottom: 40px;
+`;
 
-  flex-direction: column;
+const BoxTitle = styled.div`
+  border: 3px solid #6f3789;
+  border-radius: 28px;
+  margin: 20px auto;
+  padding: 40px 0;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 40px auto;
+  justfy-conten: center;
+  flex-direction: column;
 `;
 
 const Title = styled.h2`
+  color: #3a1b48;
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+  tex-align: center;
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+  }
+`;
+
+const TitleAnalise = styled.h2`
   color: #fff;
   font-size: 32px;
   font-weight: 700;
   margin: 0;
+  tex-align: center;
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+  }
 `;
 
 const SubTitle = styled.p`
@@ -31,6 +51,7 @@ const Wrapper = styled.div`
     #fc46c2 0%,
     #8d4aab 100%
   );
+  color: #fff;
   border-radius: 20px;
   padding: 20px 60px;
   margin-top: 40px;
@@ -173,14 +194,14 @@ const ShareEstoque = ({ jsonData }) => {
   }, [setorPercentages]);
 
   return (
-    <Wrapper>
+    <div>
       <BoxTitle>
-        <Title>Comparativo 4</Title>
-        <SubTitle>Você vs. Mercado</SubTitle>
+        <Title>Situação das categorias de produto da sua farmácia</Title>
       </BoxTitle>
-      <div>
+      <Wrapper>
+        {/* <div>
         {/* ... (código anterior) */}
-        {jsonData.length > 0 && (
+        {/* {jsonData.length > 0 && (
           <div>
             <Chart
               options={{
@@ -228,83 +249,83 @@ const ShareEstoque = ({ jsonData }) => {
             />
           </div>
         )}
-      </div>
-
-      <div>
-        <Chart
-          options={{
-            chart: {
-              type: "bar",
-              toolbar: {
-                show: false,
+      </div> */}{" "}
+        <GraficoWrapper>
+          <Chart
+            options={{
+              chart: {
+                type: "bar",
+                toolbar: {
+                  show: false,
+                },
               },
-            },
-            plotOptions: {
-              bar: {
-                horizontal: true,
-                dataLabels: {
-                  position: "center",
-                  formatter: function (val) {
-                    return `${val}%`;
-                  },
-                  style: {
-                    colors: ["#fff"], // Define a cor branca para os rótulos dos dados
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                  dataLabels: {
+                    position: "center",
+                    formatter: function (val) {
+                      return `${val}%`;
+                    },
+                    style: {
+                      colors: ["#fff"], // Define a cor branca para os rótulos dos dados
+                    },
                   },
                 },
               },
-            },
-            dataLabels: {
-              enabled: true,
-              style: {
-                fontSize: "14px",
-                colors: ["#fff"], // Define a cor branca para os rótulos do gráfico
+              dataLabels: {
+                enabled: true,
+                style: {
+                  fontSize: "14px",
+                  colors: ["#fff"], // Define a cor branca para os rótulos do gráfico
+                },
               },
-            },
-            xaxis: {
-              categories: setorPercentages.map((setor) => setor.name),
-              labels: {
-                show: false,
+              xaxis: {
+                categories: setorPercentages.map((setor) => setor.name),
+                labels: {
+                  show: false,
+                },
               },
-            },
-            yaxis: {
-              labels: {
-                show: true,
+              yaxis: {
+                labels: {
+                  show: true,
+                },
               },
-            },
-            legend: {
-              labels: {
-                colors: "#fff",
+              legend: {
+                labels: {
+                  colors: "#fff",
+                },
               },
-            },
-            colors: ["#1f002a"],
-          }}
-          series={[
-            {
-              name: "Participação",
-              data: setorPercentages.map((setor) => Number(setor.percentage)),
-            },
-          ]}
-          type="bar"
-          height="300"
-        />
-      </div>
-      <div>
-        <Title>Cenários</Title>
-        {isCenariosReady &&
-          cenarios.map((cen, index) => (
-            <Cenario key={index}>
-              <p>
-                <strong>Categoria:</strong> {cen.category}
-              </p>
-              {/* <div>Porcentagem: {cen.percentage}%</div>
+              colors: ["#1f002a"],
+            }}
+            series={[
+              {
+                name: "Participação",
+                data: setorPercentages.map((setor) => Number(setor.percentage)),
+              },
+            ]}
+            type="bar"
+            height="300"
+          />
+        </GraficoWrapper>
+        <div>
+          <TitleAnalise>Análise da Situação de Estoque</TitleAnalise>
+          {isCenariosReady &&
+            cenarios.map((cen, index) => (
+              <Cenario key={index}>
+                <p>
+                  <strong>Categoria:</strong> {cen.category}
+                </p>
+                {/* <div>Porcentagem: {cen.percentage}%</div>
               <div>Meta: {cen.meta}%</div>
               <div>Mínimo: {cen.min}%</div>
               <div>Máximo: {cen.max}%</div> */}
-              <p>Cenário: {cen.cenario}</p>
-            </Cenario>
-          ))}
-      </div>
-    </Wrapper>
+                <p>Cenário: {cen.cenario}</p>
+              </Cenario>
+            ))}
+        </div>
+      </Wrapper>
+    </div>
   );
 };
 
