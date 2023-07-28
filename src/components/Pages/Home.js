@@ -51,7 +51,7 @@ const Home = () => {
       </Paragraph>
       <InputCep
         type="text"
-        placeholder="Digite o CEP para buscar informações"
+        placeholder="Coloque apenas números"
         value={userCep}
         onChange={handleCepChange}
         id="useCep"

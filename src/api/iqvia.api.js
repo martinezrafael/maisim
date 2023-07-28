@@ -11,3 +11,16 @@ export const dataIqvia = async (cep) => {
     throw error;
   }
 };
+
+export const dataIqviaTop = async (cep) => {
+  const url = `https://apiudf.azurewebsites.net/top`;
+
+  try {
+    const response = await axios.get(url);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error("Erro ao obter dados de brick:", error);
+    throw error;
+  }
+};
