@@ -6,8 +6,12 @@ import FileDownload from "./FileDownload";
 import ShareEstoque from "./ShareEstoque";
 import styled from "styled-components";
 
+const Container = styled.div`
+  width: 100%;
+`;
+
 const BoxTitle = styled.div`
-  padding: 12px;
+  padding: 40px;
   border: 3px solid #6f3789;
   border-radius: 28px;
   display: flex;
@@ -23,7 +27,6 @@ const Title = styled.h2`
   font-weight: 700;
   margin: 0;
   text-align: center;
-  width: 70%;
 `;
 
 const BtnComparar = styled.button`
@@ -164,7 +167,7 @@ const FileUpload = ({ userCep }) => {
   };
 
   return (
-    <>
+    <Container>
       <BoxTitle>
         <Title>
           Compare o seu estoque atual com o que mais vende na sua região
@@ -198,7 +201,7 @@ const FileUpload = ({ userCep }) => {
           </>
         )}
       </div>
-    </>
+    </Container>
   );
 };
 

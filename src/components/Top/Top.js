@@ -7,35 +7,15 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const CepInput = styled.input`
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
-  display: block;
-  padding: 14px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-  width: 300px;
-
-  @media screen and (max-width: 500px) {
-    width: 80%;
-  }
-`;
-
-const CepLabel = styled.label`
-  color: #3a1b48;
-  display: block;
-`;
-
 const BoxTitle = styled.div`
-  padding: 12px;
   border: 3px solid #6f3789;
   border-radius: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin: 20px auto;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justfy-conten: center;
+  flex-direction: column;
 `;
 
 const Title = styled.h2`
@@ -43,14 +23,17 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: 700;
   margin: 0;
-  margin-bottom: 10px;
+  tex-align: center;
+  @media screen and (max-width: 500px) {
+    font-size: 24px;
+  }
 `;
 
 const SubTitle = styled.p`
   color: #3a1b48;
   font-size: 24px;
   margin: 0;
-  max-width: 60%;
+
   text-align: center;
 `;
 
@@ -203,14 +186,14 @@ const Top = ({ onCepChange, userCep }) => {
 
   return (
     <>
-      <BoxTitle>
-        <Title>Visão de Mercado</Title>
-        <SubTitle>
-          Entenda quais os itens que se destacam na sua região e aplique no seu
-          negócio
-        </SubTitle>
-      </BoxTitle>
       <Container>
+        <BoxTitle>
+          <Title>Visão de Mercado</Title>
+          <SubTitle>
+            Entenda quais os itens que se destacam na sua região e aplique no
+            seu negócio
+          </SubTitle>
+        </BoxTitle>
         {Object.keys(groupedData).map((setor) => {
           const { items } = groupedData[setor];
           return (

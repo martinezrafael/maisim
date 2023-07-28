@@ -8,14 +8,14 @@ const Container = styled.div`
 `;
 
 const BoxTitle = styled.div`
-  padding: 12px 0;
   border: 3px solid #6f3789;
   border-radius: 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin: 20px auto;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justfy-content: center;
+  flex-direction: column;
 `;
 
 const Title = styled.h2`
@@ -23,8 +23,8 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: 700;
   margin: 0;
-  text-align: center;
   width: 70%;
+  text-align: center;
 
   @media screen and (max-width: 500px) {
     font-size: 24px;
