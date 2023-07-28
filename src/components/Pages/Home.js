@@ -24,9 +24,9 @@ const Paragraph = styled.p`
 `;
 
 const InputCep = styled.input`
-  padding: 14px;
-  border-radius: 22px;
-  border: none;
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid #1f002a;
   width: 40%;
 
   @media screen and (max-width: 500px) {
