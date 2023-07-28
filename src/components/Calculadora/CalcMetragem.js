@@ -47,9 +47,9 @@ const LabelElement = styled.label`
 const InputWrapper = styled.div`
   margin-bottom: 24px;
   display: flex;
+  flex-direction: column;
 
   @media screen and (max-width: 500px) {
-    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
