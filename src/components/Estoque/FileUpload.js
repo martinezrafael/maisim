@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import * as XLSX from "xlsx";
 import Estoque from "./Estoque";
-import { dataIqvia, dataIqviaTop } from "../../api/iqvia.api";
+import { dataIqvia } from "../../api/iqvia.api";
 import FileDownload from "./FileDownload";
 import ShareEstoque from "./ShareEstoque";
 import styled from "styled-components";
@@ -76,18 +76,6 @@ const BoxParagraph = styled.p`
 const FileUpload = ({ userCep }) => {
   const [jsonData, setJsonData] = useState(null);
   const [showUnlockButtons, setShowUnlockButtons] = useState(false);
-
-  useEffect(() => {
-    async function getAlltops() {
-      try {
-        const data = await dataIqviaTop();
-        console.log(data);
-      } catch (error) {
-        console.log(`Erro ao buscar o top ${error}`);
-      }
-    }
-    getAlltops();
-  }, []);
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
