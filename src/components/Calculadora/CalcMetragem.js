@@ -37,11 +37,22 @@ const FormElement = styled.form`
 
 const LabelElement = styled.label`
   color: #3a1b48;
-  font-size: 1rem;
+  font-size: 16px;
+
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 
 const InputWrapper = styled.div`
   margin-bottom: 24px;
+  display: flex;
+
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 const InputElement = styled.input`
@@ -50,10 +61,11 @@ const InputElement = styled.input`
   padding: 18px;
   border-radius: 12px;
   font-size: 16px;
-  border: none;
+  border: 1px solid #3a1b48;
 
   @media screen and (max-width: 500px) {
     font-size: 20px;
+    margin-top: 10px;
   }
 `;
 
