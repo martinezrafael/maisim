@@ -89,12 +89,16 @@ const RowsWrapper = styled.div`
 
   @media screen and (max-width: 500px) {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "produto laboratorio"
+      "produto share";
     gap: 8px;
     padding: 24px 12px;
   }
 `;
 
-const Row = styled.div`
+const Produto = styled.div`
   display: flex;
   align-items: center;
   font-weight: 900;
@@ -103,6 +107,45 @@ const Row = styled.div`
 
   @media screen and (max-width: 500px) {
     margin-bottom: 20px;
+    grid-area: produto;
+  }
+`;
+
+const Laboratorio = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  justify-content: center;
+  text-align: center;
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+    grid-area: laboratorio;
+  }
+`;
+
+const Share = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 900;
+  justify-content: center;
+  text-align: center;
+
+  @media screen and (max-width: 500px) {
+    margin-bottom: 20px;
+    grid-area: share;
+  }
+`;
+
+const TitleColumnMobile = styled.p`
+  color: #f3d4fe;
+  display: none;
+  margin: 0;
+  margin-bottom: 8px;
+  font-size: 16px;
+
+  @media screen and (max-width: 500px) {
+    display: block;
   }
 `;
 
@@ -211,36 +254,45 @@ const Top = ({ onCepChange, userCep }) => {
                   return (
                     <React.Fragment key={index}>
                       <RowsWrapper className={`item-${(index += 1)}`}>
-                        <Row>
+                        <Produto>
                           {isShowButton && !isItemSelected ? (
                             <RowBtn onClick={() => handlePurchase(item)}>
                               <img src={Cadeado} alt="Desbloquear comparação" />
                               Desbloquear comparação
                             </RowBtn>
                           ) : (
-                            <>{item.PRODUTO}</>
+                            <p>
+                              <TitleColumnMobile>Nome</TitleColumnMobile>
+                              {item.PRODUTO}
+                            </p>
                           )}
-                        </Row>
-                        <Row>
+                        </Produto>
+                        <Laboratorio>
                           {isShowButton && !isItemSelected ? (
                             <RowBtn onClick={() => handlePurchase(item)}>
                               <img src={Cadeado} alt="Desbloquear comparação" />
                               Desbloquear comparação
                             </RowBtn>
                           ) : (
-                            <>{item.LABORATORIO}</>
+                            <p>
+                              <TitleColumnMobile>Laboratório</TitleColumnMobile>
+                              {item.LABORATORIO}
+                            </p>
                           )}
-                        </Row>
-                        <Row>
+                        </Laboratorio>
+                        <Share>
                           {isShowButton && !isItemSelected ? (
                             <RowBtn onClick={() => handlePurchase(item)}>
                               <img src={Cadeado} alt="Desbloquear comparação" />
                               Desbloquear comparação
                             </RowBtn>
                           ) : (
-                            <>{item.REPRESENTACAO}%</>
+                            <p>
+                              <TitleColumnMobile>Share</TitleColumnMobile>
+                              {item.REPRESENTACAO}%
+                            </p>
                           )}
-                        </Row>
+                        </Share>
                       </RowsWrapper>
                     </React.Fragment>
                   );
