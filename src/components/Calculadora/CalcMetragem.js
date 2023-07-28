@@ -3,11 +3,12 @@ import GraficoPotencial from "./GraficoPotencial";
 import styled from "styled-components";
 
 const Container = styled.div`
+  width: 100%;
   margin-bottom: 60px;
 `;
 
 const BoxTitle = styled.div`
-  padding: 12px;
+  padding: 12px 0;
   border: 3px solid #6f3789;
   border-radius: 28px;
   display: flex;
@@ -31,7 +32,7 @@ const Title = styled.h2`
 `;
 
 const FormElement = styled.form`
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 const LabelElement = styled.label`
@@ -83,11 +84,11 @@ const SpanElement = styled.span`
 // Show Datas
 const TitleShowDatas = styled.h3`
   color: #3a1b48;
-  font-size: 1rem; /* Alterado o tamanho da fonte */
+  font-size: 1rem;
 `;
 
 const DataShowElement = styled.span`
-  font-size: 2.5rem; /* Alterado o tamanho da fonte */
+  font-size: 2.5rem;
   font-weight: 900;
   color: #3a1b48;
 `;
