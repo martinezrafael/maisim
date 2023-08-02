@@ -3,17 +3,17 @@ import GraficoPotencial from "./GraficoPotencial";
 import styled from "styled-components";
 
 const Container = styled.div`
+  padding: 20px 0;
   width: 100%;
-`;
-
+`
 const BoxTitle = styled.div`
   border: 3px solid #6f3789;
   border-radius: 28px;
   margin: 20px auto;
-  padding: 40px 0;
+  padding: 40px 10px;
   display: flex;
   align-items: center;
-  justfy-content: center;
+  justfy-conten: center;
   flex-direction: column;
 `;
 
@@ -22,7 +22,6 @@ const Title = styled.h2`
   font-size: 32px;
   font-weight: 700;
   margin: 0;
-  width: 70%;
   text-align: center;
 
   @media screen and (max-width: 500px) {
@@ -30,95 +29,61 @@ const Title = styled.h2`
   }
 `;
 
-const FormElement = styled.form`
-  padding: 20px 0;
-`;
-
-const LabelElement = styled.label`
-  color: #3a1b48;
-  font-size: 16px;
-
-  @media screen and (max-width: 500px) {
-    font-size: 20px;
-  }
-`;
-
-const InputWrapper = styled.div`
-  margin-bottom: 24px;
+const ContainerFlex = styled.div`
   display: flex;
-  flex-direction: column;
-
-  @media screen and (max-width: 500px) {
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const InputElement = styled.input`
-  width: 100%;
-  display: block;
-  padding: 18px;
-  border-radius: 12px;
-  font-size: 16px;
-  border: 1px solid #3a1b48;
-
-  @media screen and (max-width: 500px) {
-    font-size: 20px;
-    margin-top: 10px;
-  }
-`;
-
-const Btn = styled.input`
-  padding: 18px;
-  border-radius: 12px;
-  border: none;
-  color: #fff;
-  background: radial-gradient(
-    106.63% 107.48% at 0% 0%,
-    #fc46c2 0%,
-    #8d4aab 100%
-  );
-  font-size: 1rem; /* Alterado o tamanho da fonte */
-  text-transform: uppercase;
-  font-weight: 700;
-  width: 100%; /* O botão ocupará toda a largura da tela */
-  cursor: pointer;
-`;
-
-const SpanElement = styled.span`
-  @media screen and (max-width: 500px) {
-    text-align: center;
-    display: inline-block;
-  }
-`;
-
-// Show Datas
-const TitleShowDatas = styled.h3`
-  color: #3a1b48;
-  font-size: 1rem;
-`;
-
-const DataShowElement = styled.span`
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #3a1b48;
-`;
-
-const GraphicWrapper = styled.div`
-  text-align: center;
-`;
-
-const ElementFlex = styled.div`
-  display: flex;
-  align-items: top;
-  margin-bottom: 40px;
+  align-items:top;
   justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
 
   @media screen and (max-width: 500px) {
     flex-direction: column;
-    align-items: center;
+    align-items:center;
+    justify-content:center;
   }
-`;
+
+`
+const FormElement = styled.form`
+  padding: 20px 0;
+  box-sizing:border-box;
+`
+
+const InputWrapper = styled.div`
+  margin-bottom: 20px;
+`
+
+const InputElement = styled.input`
+  border: 1px solid #1F002A;
+  border-radius: 20px;
+  font-size: 16px;
+  padding: 12px;
+  width: 100%;
+
+  @media screen and (max-width: 500px) {
+    padding: 20px 0;
+  }
+`
+
+const Submit = styled.input`
+  background: var(--radial, radial-gradient(106.63% 107.48% at 0.00% 0%, #FC46C2 0%, #8D4AAB 100%));
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 12px 24px;
+  width: 240px;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+
+`
+
+const Resultado = styled.span`
+  font-size: 40px;
+  font-weight: 900;
+`
 
 const CalcMetragem = () => {
   //valores fornecidos pelo usuário
@@ -161,10 +126,12 @@ const CalcMetragem = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const faturamentoIdealBRL = Intl.NumberFormat("pt-br", {
-      style: "currency",
-      currency: "BRL",
-    }).format(calcFaturamentoIdeal());
+    const faturamentoIdealBRL = calcFaturamentoIdeal();
+
+    // const faturamentoIdealBRL = Intl.NumberFormat("pt-br", {
+    //   style: "currency",
+    //   currency: "BRL",
+    // }).format(calcFaturamentoIdeal());
 
     setFaturamentoIdeal(faturamentoIdealBRL);
 
@@ -176,17 +143,17 @@ const CalcMetragem = () => {
       <BoxTitle>
         <Title>Potencial de Faturamento da Farmácia</Title>
       </BoxTitle>
-      <SpanElement>Preencha o formulário para obter os resultados.</SpanElement>
-      <ElementFlex>
-        {" "}
+      <span>Preencha o formulário para obter os resultados.</span>
+      <ContainerFlex>
         <FormElement onSubmit={handleSubmit}>
           <InputWrapper>
-            <LabelElement htmlFor="metragem">Metragem (em m2)</LabelElement>{" "}
+            <label htmlFor="metragem">Metragem (em m2)</label>
             <InputElement
               type="text"
               required
               id="metragem"
               value={metragemComercial}
+              placeholder="Apenas números"
               onChange={(event) =>
                 setMetragemComercial(
                   Number(event.target.value).toLocaleString()
@@ -195,36 +162,37 @@ const CalcMetragem = () => {
             />
           </InputWrapper>
           <InputWrapper>
-            <LabelElement htmlFor="faturamento">
+            <label htmlFor="faturamento">
               Faturamento (aprox.)
-            </LabelElement>{" "}
+            </label>
             <InputElement
               type="text"
               required
               id="faturamento"
               value={faturamentoUsuario}
+              placeholder="Apenas números"
               onChange={(event) =>
                 setFaturamentoUsuario(Number(event.target.value))
               }
             />
           </InputWrapper>
-          <Btn type="submit" value="Calcular" />
+          <Submit type="submit" value="Calcular" />
         </FormElement>
-        <GraphicWrapper>
+        <div>
           {potencialFaturamento !== undefined ? (
             <>
-              <TitleShowDatas>Potencial de Faturamento</TitleShowDatas>
+              <h3>Potencial de Faturamento</h3>
               <GraficoPotencial data={potencialFaturamento} />
             </>
           ) : undefined}
-        </GraphicWrapper>
+        </div>
         <div>
           <div>
             <div>
               {metragemComercial !== "" ? (
                 <>
-                  <TitleShowDatas>Metragem média (em m2)</TitleShowDatas>
-                  <DataShowElement>{metragemComercial}</DataShowElement>
+                  <h3>Metragem média (em m2)</h3>
+                  <Resultado>{metragemComercial}</Resultado>
                 </>
               ) : (
                 ""
@@ -233,14 +201,14 @@ const CalcMetragem = () => {
             <div>
               {faturamentoIdeal !== undefined ? (
                 <>
-                  <TitleShowDatas>Faturamento médio (aprox.)</TitleShowDatas>
-                  <DataShowElement>{faturamentoIdeal}</DataShowElement>
+                  <h3>Faturamento médio (aprox.)</h3>
+                  <Resultado>R$ {faturamentoIdeal}</Resultado>
                 </>
               ) : undefined}
             </div>
           </div>
         </div>
-      </ElementFlex>
+      </ContainerFlex>
     </Container>
   );
 };
